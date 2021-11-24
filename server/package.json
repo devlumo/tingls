@@ -12,6 +12,7 @@
   "author": "Luke Molloy",
   "license": "None",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "connect-redis": "^6.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -20,6 +21,7 @@
     "express-session": "^1.17.2",
     "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
-    "redis": "^3.1.2"
+    "redis": "^3.1.2",
+    "validator": "^13.7.0"
   }
 }

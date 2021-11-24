@@ -1,3 +1,5 @@
+import User from "../models/userModel.js";
+
 const login = (req, res, next) => {
   // 1. Get user login information
 
@@ -20,4 +22,29 @@ const login = (req, res, next) => {
   });
 };
 
-export { login };
+const signup = async (req, res, next) => {
+  try {
+    // 1. Try and insert new user
+    const newUser = await User.create({
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      dob: req.body.dob,
+    });
+
+    // 2. Create session to log the user in
+    req.session.userID = newUser._id;
+
+    // 3. Send response
+    res.status(200).json({
+      success: true,
+      message: "Your account has been created",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { login, signup };
