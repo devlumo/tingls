@@ -1,10 +1,4 @@
-import User from "../models/userModel.js";
-
-/*
-  TODO:
-  - Add new protect feature for premium check
-  - Add new protect feature for ID / Role check
-*/
+import User from "../../models/userModel.js";
 
 const login = async (req, res, next) => {
   try {
@@ -61,11 +55,4 @@ const signup = async (req, res, next) => {
   }
 };
 
-const protect = (req, res, next) => {
-  if (!req.session || !req.session.userName) {
-    return next(new Error("Please login to view this content"));
-  }
-  next();
-};
-
-export { login, signup, protect };
+export { login, signup };
