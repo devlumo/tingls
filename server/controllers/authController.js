@@ -1,25 +1,28 @@
 import User from "../models/userModel.js";
 
-const login = (req, res, next) => {
-  // 1. Get user login information
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
 
-  const { email, password } = req.body;
+    if (!email || !password) {
+      return next(new Error("Provide a valid email or password"));
+    }
 
-  // 2. Check that user exists and passwords match
+    const user = await User.findOne({ email }).select("+password");
 
-  // 3. Check if session already exists
+    if (!user || !(await user.checkPassword(password, user.password))) {
+      return next(new Error("Email or Password is incorrect"));
+    }
 
-  // 4. Initialise new session
+    req.session.user_id = user._id;
 
-  req.session.user = "Luke";
-  // 5. Send response without disclosing sensitive info
-  res.status(200).json({
-    success: true,
-    message: "Logged in",
-    email,
-    password,
-    session: req.session,
-  });
+    res.status(200).json({
+      success: true,
+      message: "Logged in successfully",
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const signup = async (req, res, next) => {

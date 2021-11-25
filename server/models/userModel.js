@@ -40,6 +40,8 @@ const userSchema = mongoose.Schema({
   premium: false,
 });
 
+// MIDDLEWARES
+
 userSchema.pre("save", function (next) {
   this.dateCreated = Date.now();
   next();
@@ -52,6 +54,16 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
+
+// INSTANCE METHODS
+
+userSchema.methods.checkPassword = async function (
+  candidatePassword,
+  actualPassword
+) {
+  const isCorrect = await bcrypt.compare(candidatePassword, actualPassword);
+  return isCorrect;
+};
 
 const User = mongoose.model("User", userSchema);
 
