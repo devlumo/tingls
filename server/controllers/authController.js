@@ -1,7 +1,17 @@
 import User from "../models/userModel.js";
 
+/*
+  TODO:
+  - Add new protect feature for premium check
+  - Add new protect feature for ID / Role check
+*/
+
 const login = async (req, res, next) => {
   try {
+    if (req.session.userName) {
+      return next(new Error("You are already logged in"));
+    }
+
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -14,7 +24,7 @@ const login = async (req, res, next) => {
       return next(new Error("Email or Password is incorrect"));
     }
 
-    req.session.user_id = user._id;
+    req.session.userName = user.userName;
 
     res.status(200).json({
       success: true,
@@ -38,7 +48,7 @@ const signup = async (req, res, next) => {
     });
 
     // 2. Create session to log the user in
-    req.session.userID = newUser._id;
+    req.session.userName = newUser.userName;
 
     // 3. Send response
     res.status(200).json({
@@ -47,7 +57,15 @@ const signup = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
+    return next(new Error("Something went wrong"));
   }
 };
 
-export { login, signup };
+const protect = (req, res, next) => {
+  if (!req.session || !req.session.userName) {
+    return next(new Error("Please login to view this content"));
+  }
+  next();
+};
+
+export { login, signup, protect };

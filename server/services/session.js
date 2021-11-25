@@ -6,7 +6,7 @@ const RedisStore = connectRedis(session);
 
 const currentSession = session({
   store: new RedisStore({ client: redisClient }),
-  secret: "mysecret",
+  secret: process.env.SESSIONS_SECRET,
   resave: false,
   name: "session-id",
   saveUninitialized: false,
