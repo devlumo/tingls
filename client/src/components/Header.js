@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const Header = () => {
-  use;
   const { userName } = useSelector((state) => state.user);
   return (
     <div className="bg-purple-500 h-16 w-screen p-4 flex justify-between items-center shadow-lg">
