@@ -11,7 +11,6 @@ const Login = () => {
     try {
       e.preventDefault();
       const { email, password } = e.target.elements;
-      console.log(email);
 
       const res = await axios.post(
         "http://127.0.0.1:8080/api/auth/login/",
@@ -25,8 +24,7 @@ const Login = () => {
       console.log(res.data);
       navigate("/");
     } catch (error) {
-      console.log(error);
-      setError("Username or password is incorrect");
+      setError("email or password is incorrect!");
     }
   };
 
@@ -56,7 +54,7 @@ const Login = () => {
             type="submit"
             className="bg-purple-500 text-white rounded-md p-1 w-1/3 ml-auto hover:bg-purple-600"
           >
-            Go!
+            login
           </button>
           <span className="text-red-400">{error ? `${error}` : ""}</span>
         </form>
