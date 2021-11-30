@@ -14,6 +14,7 @@ const currentSession = session({
     secure: false,
     httpOnly: true,
     maxAge: 1000 * 60 * 30, // 30 min
+    sameSite: "Lax",
   },
 });
 
