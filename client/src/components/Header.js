@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import mandala from "../images/mandala.png";
 
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
 const Header = () => {
+  use;
+  const { userName } = useSelector((state) => state.user);
   return (
     <div className="bg-purple-500 h-16 w-screen p-4 flex justify-between items-center shadow-lg">
       <span className="text-white text-xl">
@@ -14,7 +18,7 @@ const Header = () => {
       </span>
       <ul className="flex space-x-8 text-white text-md pr-4">
         <li className="text-white text-md">
-          <Link to="/login">login</Link>
+          {userName ? userName.toUpperCase() : <Link to="/login">login</Link>}
         </li>
         <li className="text-white text-md">about</li>
       </ul>
