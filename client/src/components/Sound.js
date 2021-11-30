@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import ReactHowler from "react-howler";
 import { Howler } from "howler";
 
-export const Sound = ({ name, path }) => {
+const Sound = ({ name, path }) => {
   const player = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
@@ -52,3 +52,5 @@ export const Sound = ({ name, path }) => {
     </div>
   );
 };
+
+export default Sound;

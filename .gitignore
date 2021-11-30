@@ -1,6 +1,6 @@
 server/config.env
 assets/
-.rdb
+/dump.rdb
 
 # dependencies
 server/node_modules
