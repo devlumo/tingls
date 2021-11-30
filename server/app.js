@@ -9,9 +9,9 @@ import soundsRouter from "./routes/soundsRouter.js";
 const app = express();
 
 app.use(corsConfig);
+app.use(currentSession);
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(currentSession);
 
 app.use("/api/auth", authRouter);
 app.use("/api/sounds", soundsRouter);
