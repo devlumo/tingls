@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Sound } from "./Sound";
-import { Howler } from "howler";
+// import { Howler } from "howler";
 
 /* 
   TODO:
   - Fix audio context issue - https://stackoverflow.com/questions/46690346/react-and-howlerjs-howler-ctx-is-null
 */
-Howler.mute(false);
-Howler.volume(1);
+// Howler.mute(false);
+// Howler.volume(1);
 
 function App() {
   const [sounds, setSounds] = useState(null);
