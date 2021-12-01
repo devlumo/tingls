@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sound from "./Sound";
 
+import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+
+const globalSound = window.Howler;
+
 const SoundsContainer = () => {
   const [sounds, setSounds] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [mute, setMute] = useState(false);
 
   useEffect(() => {
     async function getSounds() {
@@ -23,6 +28,11 @@ const SoundsContainer = () => {
     getSounds();
   }, []);
 
+  const handleMute = () => {
+    setMute(!mute);
+    globalSound.mute(!mute);
+  };
+
   return (
     <div className="flex justify-center items-center space-x-4">
       {loading ? (
@@ -32,6 +42,9 @@ const SoundsContainer = () => {
           return <Sound key={el._id} path={el.path} name={el.name} />;
         })
       )}
+      <button onClick={handleMute}>
+        {mute ? <FaVolumeMute /> : <FaVolumeUp />}
+      </button>
     </div>
   );
 };
