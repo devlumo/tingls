@@ -1,13 +1,18 @@
 import React from "react";
 import { useState, useRef } from "react";
 import ReactHowler from "react-howler";
-
-import { FaPlay, FaCloudRain, FaPause } from "react-icons/fa";
+import icons from "../../utils/iconSort";
+import { FaPlay, FaPause } from "react-icons/fa";
 
 const Sound = ({ name, path }) => {
   const player = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
+
+  let icon = icons.find((icon) => icon.name === name);
+  if (!icon) {
+    icon = icons.find((icon) => icon.name === "default");
+  }
   //const [duration, setDuration] = useState(null);
 
   const playSound = () => {
@@ -18,7 +23,7 @@ const Sound = ({ name, path }) => {
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-md">
-      <FaCloudRain className="mb-4 text-green-600 text-2xl" />
+      {icon.component}
       <div className="flex items-center justify-center flex-col">
         <h1 className="text-4xl font-bold">{name}</h1>
         <div className="mt-4 mb-4 flex flex-col items-center justify-center">

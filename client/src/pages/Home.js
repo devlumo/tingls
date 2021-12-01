@@ -1,5 +1,5 @@
 import React from "react";
-import SoundsContainer from "../components/SoundContainer";
+import SoundsContainer from "../components/Players/PlayersContainer";
 
 const Home = () => {
   return (

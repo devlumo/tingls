@@ -6,7 +6,7 @@ import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
 const globalSound = window.Howler;
 
-const SoundsContainer = () => {
+const PlayersContainer = () => {
   const [sounds, setSounds] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mute, setMute] = useState(false);
@@ -49,4 +49,4 @@ const SoundsContainer = () => {
   );
 };
 
-export default SoundsContainer;
+export default PlayersContainer;
