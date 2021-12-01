@@ -4,7 +4,7 @@ import axios from "axios";
 import mandala from "../images/mandala.png";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setUsername } from "../redux/auth";
+import { setEmail, setUsername } from "../redux/auth";
 import { useEffect } from "react";
 
 const Header = () => {
@@ -16,8 +16,11 @@ const Header = () => {
           "http://127.0.0.1:8080/api/auth/getSession",
           { withCredentials: true }
         );
-        console.log(res);
-        dispatch(setUsername(res.data.userName));
+        // TODO: IF STATEMENT
+        const userData = res.data.userData;
+
+        dispatch(setUsername(userData.username));
+        dispatch(setEmail(userData.email));
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +38,7 @@ const Header = () => {
       </span>
       <ul className="flex space-x-8 text-white text-md pr-4">
         <li className="text-white text-md">
-          {userName ? userName.toUpperCase() : <Link to="/login">login</Link>}
+          {userName ? userName.toLowerCase() : <Link to="/login">login</Link>}
         </li>
         <li className="text-white text-md">about</li>
       </ul>

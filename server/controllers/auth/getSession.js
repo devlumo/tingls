@@ -1,15 +1,11 @@
-import redisClient from "../../database/redisConfig.js";
-
 const getSession = async (req, res, next) => {
   try {
-    if (!req.session || !req.session.userName) {
+    if (!req.session || !req.session.userData) {
       next(new Error("You are not logged in"));
     }
 
-    console.log(req.session.userName);
-
     res.status(200).json({
-      userName: req.session.userName,
+      userData: req.session.userData,
     });
   } catch (error) {
     console.log(error.message);

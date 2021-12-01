@@ -18,10 +18,14 @@ const login = async (req, res, next) => {
       return next(new Error("Email or Password is incorrect"));
     }
 
-    req.session.userName = user.userName;
+    req.session.userData = {
+      username: user.userName,
+      email: user.email,
+    };
 
     res.status(200).json({
       success: true,
+      userData: req.session.userData,
       message: "Logged in successfully",
     });
   } catch (error) {
@@ -42,11 +46,15 @@ const signup = async (req, res, next) => {
     });
 
     // 2. Create session to log the user in
-    req.session.userName = newUser.userName;
+    req.session.userData = {
+      username: newUser.userName,
+      email: newUser.email,
+    };
 
     // 3. Send response
     res.status(200).json({
       success: true,
+      userData: req.session.userData,
       message: "Your account has been created",
     });
   } catch (error) {

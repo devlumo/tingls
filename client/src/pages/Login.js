@@ -3,9 +3,13 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import { useDispatch } from "react-redux";
+import { setEmail, setUsername } from "../redux/auth";
+
 const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     try {
@@ -21,7 +25,10 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      console.log(res.data);
+      const userData = res.data.userData;
+
+      dispatch(setUsername(userData.username));
+      dispatch(setEmail(userData.email));
       navigate("/");
     } catch (error) {
       setError("email or password is incorrect!");
