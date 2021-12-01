@@ -24,8 +24,7 @@ const SoundsContainer = () => {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Hello Tingls</h1>
+    <div className="flex justify-center items-center space-x-4">
       {loading ? (
         <p>Loading</p>
       ) : (

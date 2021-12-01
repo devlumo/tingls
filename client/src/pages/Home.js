@@ -3,8 +3,7 @@ import SoundsContainer from "../components/SoundContainer";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="w-screen flex items-center justify-center flex-grow bg-gray-200">
       <SoundsContainer />
     </div>
   );

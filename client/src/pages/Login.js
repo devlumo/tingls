@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen flex items-center justify-center flex-grow">
+    <div className="w-screen flex items-center justify-center flex-grow bg-gray-200">
       <div className="w-1/5 p-5 flex flex-col space-y-4">
         <h2 className="text-purple-600 text-3xl">login</h2>
         <form
