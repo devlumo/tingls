@@ -30,6 +30,7 @@ const Sound = ({ id, name, path }) => {
   };
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     dispatch(updateVolume({ id, volume: e.target.value }));
   };
 
@@ -43,7 +44,7 @@ const Sound = ({ id, name, path }) => {
             playing={playing}
             src={[path]}
             ref={player}
-            volume={parseFloat(currentSound.volume)}
+            volume={currentSound.volume ? parseFloat(currentSound.volume) : 0.5}
             loop={true}
           />
           <div className="flex flex-row mb-4 mt-4">
@@ -60,8 +61,8 @@ const Sound = ({ id, name, path }) => {
               min="0"
               max="1"
               step="any"
-              defaultValue="0.5"
               onChange={handleChange}
+              defaultValue={currentSound.volume ? currentSound.volume : "0.5"}
             />
           </div>
         </div>

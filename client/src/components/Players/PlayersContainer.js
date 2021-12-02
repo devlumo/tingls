@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sound from "./Sound";
 import { saveSounds } from "../../redux/sounds";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
@@ -13,29 +13,31 @@ const PlayersContainer = () => {
   const [mute, setMute] = useState(false);
   const [sounds, setSounds] = useState(null);
   const dispatch = useDispatch();
+  const selectSounds = useSelector((state) => state.sounds);
 
   useEffect(() => {
     async function getSounds() {
       try {
+        // check if sounds are stored already, if so we don't call the API
+        if (selectSounds) {
+          setSounds(selectSounds.sounds);
+          setLoading(false);
+          return;
+        }
+
         const res = await axios.get("http://localhost:8080/api/sounds/", {
           withCredentials: true,
         });
 
-        const updateSounds = res.data.sounds;
-        updateSounds.forEach((sound) => {
-          sound.volume = 0.5;
-          sound.playing = false;
-        });
-
-        dispatch(saveSounds(updateSounds));
-        setSounds(updateSounds);
+        dispatch(saveSounds(res.data.sounds));
+        setSounds(res.data.sounds);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
     getSounds();
-  }, [dispatch]);
+  }, [dispatch, selectSounds]);
 
   const handleMute = () => {
     setMute(!mute);
