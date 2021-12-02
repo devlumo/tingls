@@ -35,6 +35,7 @@ const login = async (req, res, next) => {
 
 const signup = async (req, res, next) => {
   try {
+    console.log(req.body);
     // 1. Try and insert new user
     const newUser = await User.create({
       userName: req.body.userName,
@@ -50,6 +51,8 @@ const signup = async (req, res, next) => {
       username: newUser.userName,
       email: newUser.email,
     };
+
+    console.log(req.body);
 
     // 3. Send response
     res.status(200).json({
