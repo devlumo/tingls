@@ -1,24 +1,36 @@
 import React from "react";
 import { useState, useRef } from "react";
 import ReactHowler from "react-howler";
+
 import icons from "../../utils/iconSort";
 import { FaPlay, FaPause } from "react-icons/fa";
 
-const Sound = ({ name, path }) => {
+import { updateVolume } from "../../redux/sounds";
+import { useSelector, useDispatch } from "react-redux";
+
+const Sound = ({ id, name, path }) => {
   const player = useRef(null);
   const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+  const soundData = useSelector((state) => state.sounds.sounds);
+
+  const currentSound = soundData.find((sound) => sound._id === id);
+  const dispatch = useDispatch();
 
   let icon = icons.find((icon) => icon.name === name);
   if (!icon) {
     icon = icons.find((icon) => icon.name === "default");
   }
+
   //const [duration, setDuration] = useState(null);
 
   const playSound = () => {
     setPlaying(!playing);
     // take the extra methods off the current object which is referenced
     //setDuration(player.current.seek());
+  };
+
+  const handleChange = (e) => {
+    dispatch(updateVolume({ id, volume: e.target.value }));
   };
 
   return (
@@ -31,7 +43,7 @@ const Sound = ({ name, path }) => {
             playing={playing}
             src={[path]}
             ref={player}
-            volume={volume}
+            volume={parseFloat(currentSound.volume)}
             loop={true}
           />
           <div className="flex flex-row mb-4 mt-4">
@@ -49,7 +61,7 @@ const Sound = ({ name, path }) => {
               max="1"
               step="any"
               defaultValue="0.5"
-              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              onChange={handleChange}
             />
           </div>
         </div>

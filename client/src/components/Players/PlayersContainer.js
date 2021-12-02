@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sound from "./Sound";
+import { saveSounds } from "../../redux/sounds";
+import { useDispatch } from "react-redux";
 
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
 const globalSound = window.Howler;
 
 const PlayersContainer = () => {
-  const [sounds, setSounds] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mute, setMute] = useState(false);
+  const [sounds, setSounds] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getSounds() {
@@ -18,15 +21,21 @@ const PlayersContainer = () => {
           withCredentials: true,
         });
 
-        setSounds(res.data.sounds);
+        const updateSounds = res.data.sounds;
+        updateSounds.forEach((sound) => {
+          sound.volume = 0.5;
+          sound.playing = false;
+        });
 
+        dispatch(saveSounds(updateSounds));
+        setSounds(updateSounds);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
     getSounds();
-  }, []);
+  }, [dispatch]);
 
   const handleMute = () => {
     setMute(!mute);
@@ -39,7 +48,9 @@ const PlayersContainer = () => {
         <p>Loading</p>
       ) : (
         sounds.map((el) => {
-          return <Sound key={el._id} path={el.path} name={el.name} />;
+          return (
+            <Sound key={el._id} id={el._id} name={el.name} path={el.path} />
+          );
         })
       )}
       <button onClick={handleMute}>

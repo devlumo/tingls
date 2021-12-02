@@ -32,10 +32,7 @@ const SignupForm = () => {
         { withCredentials: true }
       );
 
-      console.log(res);
-
       const userData = res.data.userData;
-
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));
       navigate("/");
