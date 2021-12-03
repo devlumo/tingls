@@ -2,26 +2,15 @@ import React from "react";
 import { useState, useRef } from "react";
 import ReactHowler from "react-howler";
 
-import icons from "../../utils/iconSort";
+import findIcon from "../../utils/iconSort";
 import { FaPlay, FaPause } from "react-icons/fa";
-
-import { updateVolume } from "../../redux/sounds";
-import { useSelector, useDispatch } from "react-redux";
+import updateLocalStorage from "../../utils/updateLocalStorage";
 
 const Sound = ({ id, name, path }) => {
   const player = useRef(null);
   const [playing, setPlaying] = useState(false);
-  const soundData = useSelector((state) => state.sounds.sounds);
-
-  const currentSound = soundData.find((sound) => sound._id === id);
-  const dispatch = useDispatch();
-
-  let icon = icons.find((icon) => icon.name === name);
-  if (!icon) {
-    icon = icons.find((icon) => icon.name === "default");
-  }
-
-  //const [duration, setDuration] = useState(null);
+  const [volume, setVolume] = useState(0.5);
+  const icon = findIcon(name);
 
   const playSound = () => {
     setPlaying(!playing);
@@ -30,13 +19,13 @@ const Sound = ({ id, name, path }) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    dispatch(updateVolume({ id, volume: e.target.value }));
+    updateLocalStorage("volume", e.target.value, id);
+    setVolume(parseFloat(e.target.value));
   };
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-md">
-      {icon.component}
+      {icon}
       <div className="flex items-center justify-center flex-col">
         <h1 className="text-4xl font-bold">{name}</h1>
         <div className="mt-4 mb-4 flex flex-col items-center justify-center">
@@ -44,7 +33,7 @@ const Sound = ({ id, name, path }) => {
             playing={playing}
             src={[path]}
             ref={player}
-            volume={currentSound.volume ? parseFloat(currentSound.volume) : 0.5}
+            volume={volume}
             loop={true}
           />
           <div className="flex flex-row mb-4 mt-4">
@@ -62,7 +51,7 @@ const Sound = ({ id, name, path }) => {
               max="1"
               step="any"
               onChange={handleChange}
-              defaultValue={currentSound.volume ? currentSound.volume : "0.5"}
+              defaultValue="0.5"
             />
           </div>
         </div>

@@ -21,4 +21,13 @@ const icons = [
     component: <FaFire className={style} />,
   },
 ];
-export default icons;
+
+const findIcon = (name) => {
+  let icon = icons.find((icon) => icon.name === name);
+  if (!icon) {
+    icon = icons.find((icon) => icon.name === "default");
+  }
+  return icon.component;
+};
+
+export default findIcon;

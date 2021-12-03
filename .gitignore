@@ -7,6 +7,7 @@ server/node_modules
 client/node_modules
 client/.pnp
 client/.pnp.js
+client/persistFunctionality.txt
 
 # testing
 client/coverage

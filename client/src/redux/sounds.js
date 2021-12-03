@@ -1,22 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialState = {
-  sounds: [],
-};
+export const getSounds = createAsyncThunk("sounds/getSounds", async () => {
+  const result = await axios.get("http://localhost:8080/api/sounds/", {
+    withCredentials: true,
+  });
+  return result.data.sounds;
+});
 
 const soundSlice = createSlice({
   name: "sound",
-  initialState,
+  initialState: {
+    sounds: [],
+    status: null,
+  },
   reducers: {
-    saveSounds(state, action) {
-      state.sounds = action.payload;
-    },
     updateVolume(state, action) {
       state.sounds.find((sound) => sound._id === action.payload.id).volume =
         action.payload.volume;
     },
   },
+  extraReducers: {
+    [getSounds.pending]: (state, action) => {
+      state.status = "Loading";
+    },
+    [getSounds.fulfilled]: (state, action) => {
+      state.sounds = action.payload;
+      state.status = "Complete";
+    },
+    [getSounds.rejected]: (state, action) => {
+      state.status = "Couldn't fetch new data";
+    },
+  },
 });
 
-export const { saveSounds, updateVolume } = soundSlice.actions;
+export const { updateVolume } = soundSlice.actions;
 export default soundSlice.reducer;
