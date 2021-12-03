@@ -26,4 +26,20 @@ const updateLocalStorage = (property, value, id) => {
   }
 };
 
-export default updateLocalStorage;
+const checkLocalStorage = (property, defaultValue, id) => {
+  const state = JSON.parse(localStorage.getItem("sound-state"));
+
+  if (!state) {
+    return defaultValue;
+  }
+
+  const getCurrentObject = state.find((obj) => obj.id === id);
+
+  if (!getCurrentObject || !getCurrentObject[property]) {
+    return defaultValue;
+  }
+
+  return getCurrentObject[property];
+};
+
+export { updateLocalStorage, checkLocalStorage };

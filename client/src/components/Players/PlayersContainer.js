@@ -11,7 +11,6 @@ const globalSound = window.Howler;
 const PlayersContainer = () => {
   const [loading, setLoading] = useState(true);
   const [mute, setMute] = useState(false);
-  //const [sounds, setSounds] = useState(null);
   const dispatch = useDispatch();
   const selectSounds = useSelector((state) => state.sounds);
 

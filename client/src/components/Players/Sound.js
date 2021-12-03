@@ -4,15 +4,23 @@ import ReactHowler from "react-howler";
 
 import findIcon from "../../utils/iconSort";
 import { FaPlay, FaPause } from "react-icons/fa";
-import updateLocalStorage from "../../utils/updateLocalStorage";
+import {
+  updateLocalStorage,
+  checkLocalStorage,
+} from "../../utils/updateLocalStorage";
 
 const Sound = ({ id, name, path }) => {
   const player = useRef(null);
-  const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+  const [playing, setPlaying] = useState(
+    checkLocalStorage("playing", false, id)
+  );
+  const [volume, setVolume] = useState(
+    parseFloat(checkLocalStorage("volume", 0.5, id))
+  );
   const icon = findIcon(name);
 
   const playSound = () => {
+    updateLocalStorage("playing", !playing, id);
     setPlaying(!playing);
     // take the extra methods off the current object which is referenced
     //setDuration(player.current.seek());
@@ -51,7 +59,7 @@ const Sound = ({ id, name, path }) => {
               max="1"
               step="any"
               onChange={handleChange}
-              defaultValue="0.5"
+              defaultValue={volume}
             />
           </div>
         </div>
@@ -60,6 +68,7 @@ const Sound = ({ id, name, path }) => {
       <p className="text-xs text-gray-500 uppercase">
         {playing ? "playing" : "paused"}
       </p>
+      <button>Click</button>
     </div>
   );
 };
