@@ -6,10 +6,18 @@ const updateLocalStorage = (property, value, id) => {
         value: new value to be used in object
         id: id of the object in the local storage array
     */
-  if (localStorage.getItem("sound-state")) {
-    const state = JSON.parse(localStorage.getItem("sound-state"));
-    const getCurrentObject = state.find((obj) => obj.id === id);
 
+  const state = JSON.parse(localStorage.getItem("sound-state"));
+
+  if (!id) {
+    state.forEach((element) => {
+      element.playing = value;
+    });
+    return;
+  }
+
+  if (state) {
+    const getCurrentObject = state.find((obj) => obj.id === id);
     if (getCurrentObject) {
       const index = state.indexOf(getCurrentObject);
       state[index][property] = value;
