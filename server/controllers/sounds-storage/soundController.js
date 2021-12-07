@@ -1,4 +1,5 @@
 import Sound from "../../models/soundsModel.js";
+import ApiError from "../../utils/ApiError.js";
 
 const getAllSounds = async (req, res, next) => {
   try {
@@ -9,7 +10,7 @@ const getAllSounds = async (req, res, next) => {
       sounds,
     });
   } catch (error) {
-    console.log(error);
+    next(new ApiError("Nothing found here", 404));
   }
 };
 
@@ -23,7 +24,7 @@ const createSound = async (req, res, next) => {
       newSound,
     });
   } catch (error) {
-    console.log(error);
+    next(new ApiError("Something went wrong", 400));
   }
 };
 

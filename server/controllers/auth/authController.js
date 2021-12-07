@@ -1,21 +1,22 @@
 import User from "../../models/userModel.js";
+import ApiError from "../../utils/ApiError.js";
 
 const login = async (req, res, next) => {
   try {
     if (req.session.userName) {
-      return next(new Error("You are already logged in"));
+      return next(new ApiError("You are already logged in", 400));
     }
 
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return next(new Error("Provide a valid email or password"));
+      return next(new ApiError("Provide a valid email or password", 401));
     }
 
     const user = await User.findOne({ email }).select("+password");
 
     if (!user || !(await user.checkPassword(password, user.password))) {
-      return next(new Error("Email or Password is incorrect"));
+      return next(new ApiError("Email or Password is incorrect", 401));
     }
 
     req.session.userData = {
@@ -29,13 +30,12 @@ const login = async (req, res, next) => {
       message: "Logged in successfully",
     });
   } catch (error) {
-    console.log(error);
+    return next(new ApiError("Something went wrong", 400));
   }
 };
 
 const signup = async (req, res, next) => {
   try {
-    console.log(req.body);
     // 1. Try and insert new user
     const newUser = await User.create({
       userName: req.body.userName,
@@ -52,8 +52,6 @@ const signup = async (req, res, next) => {
       email: newUser.email,
     };
 
-    console.log(req.body);
-
     // 3. Send response
     res.status(200).json({
       success: true,
@@ -61,8 +59,7 @@ const signup = async (req, res, next) => {
       message: "Your account has been created",
     });
   } catch (error) {
-    console.log(error);
-    return next(new Error("Something went wrong"));
+    return next(new ApiError("Something went wrong"));
   }
 };
 

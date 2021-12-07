@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaVolumeMute, FaVolumeUp, FaStop, FaPlay } from "react-icons/fa";
 import { updateLocalStorage } from "../../utils/updateLocalStorage";
 
-const globalSound = window.Howler;
-
 const PlayersContainer = () => {
   const [loading, setLoading] = useState(true);
   const [mute, setMute] = useState(false);
@@ -22,13 +20,13 @@ const PlayersContainer = () => {
 
   const handleMute = () => {
     setMute(!mute);
-    globalSound.mute(!mute);
+    window.Howler.mute(!mute);
   };
 
   const handleStop = () => {
     updateLocalStorage("playing", !stop);
     setStop(!stop);
-    globalSound.stop(!stop);
+    //globalSoundHandler.stop(!stop);
   };
 
   return (

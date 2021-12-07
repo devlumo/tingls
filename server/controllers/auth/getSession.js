@@ -1,14 +1,16 @@
+import ApiError from "../../utils/ApiError.js";
+
 const getSession = async (req, res, next) => {
   try {
     if (!req.session || !req.session.userData) {
-      next(new Error("You are not logged in"));
+      return next(new ApiError("You are not logged in", 401));
     }
 
     res.status(200).json({
       userData: req.session.userData,
     });
   } catch (error) {
-    console.log(error.message);
+    return next(new ApiError("You are not logged in", 401));
   }
 };
 
