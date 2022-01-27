@@ -1,55 +1,66 @@
 import React, { useState, useEffect } from "react";
 import Sound from "./Sound";
-import { getSounds } from "../../redux/sounds";
+import { getSounds, updateGlobalPlay } from "../../redux/sounds";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FaVolumeMute, FaVolumeUp, FaStop, FaPlay } from "react-icons/fa";
 import { updateLocalStorage } from "../../utils/updateLocalStorage";
 
 const PlayersContainer = () => {
-  const [loading, setLoading] = useState(true);
-  const [mute, setMute] = useState(false);
-  const [stop, setStop] = useState(true);
+  // const selectGlobalPlay = useSelector((state) => state.sounds.globalPlay);
   const dispatch = useDispatch();
-  const selectSounds = useSelector((state) => state.sounds);
+
+  const [loading, setLoading] = useState(true);
+  // const [mute, setMute] = useState(false);
+  // const [stopped, setStop] = useState(!selectGlobalPlay);
 
   useEffect(() => {
+    // trigger redux thunk request
     dispatch(getSounds());
     setLoading(false);
   }, [dispatch]);
 
-  const handleMute = () => {
-    setMute(!mute);
-    window.Howler.mute(!mute);
-  };
+  const selectSounds = useSelector((state) => state.sounds.sounds);
+  console.log(selectSounds, "playercontainer");
 
-  const handleStop = () => {
-    updateLocalStorage("playing", !stop);
-    setStop(!stop);
-    //globalSoundHandler.stop(!stop);
-  };
+  // const handleMute = () => {
+  //   setMute(!mute);
+  //   window.Howler.mute(!mute);
+  // };
+
+  // const handleStop = () => {
+  //   // check if there is any sound playing, if not, lets start
+  //   let soundstate = JSON.parse(localStorage.getItem("sound-state"));
+  //   let anySoundsPlaying = soundstate.find(
+  //     (sound) => sound.volume > 0 && sound.playing === true
+  //   );
+
+  //   if (!anySoundsPlaying) {
+  //     updateLocalStorage("playing", !stopped);
+  //     setStop(!stopped);
+  //     window.Howler.stop(!stopped);
+  //     dispatch(updateGlobalPlay(stopped));
+  //     return;
+  //   }
+
+  //   // undo the above
+  //   updateLocalStorage("playing", !stopped);
+  //   setStop(!stopped);
+  //   window.Howler.stop(!stopped);
+  //   dispatch(updateGlobalPlay(stopped));
+  // };
 
   return (
     <div className="flex justify-center items-center space-x-4">
       {loading ? (
         <p>Loading</p>
       ) : (
-        selectSounds.sounds.map((el) => {
+        selectSounds.map((el) => {
           return (
-            <Sound
-              key={el._id}
-              id={el._id}
-              name={el.name}
-              path={el.path}
-              stop={stop}
-            />
+            <Sound key={el._id} id={el._id} name={el.name} path={el.path} />
           );
         })
       )}
-      <button onClick={handleMute}>
-        {mute ? <FaVolumeMute /> : <FaVolumeUp />}
-      </button>
-      <button onClick={handleStop}>{stop ? <FaPlay /> : <FaStop />}</button>
     </div>
   );
 };

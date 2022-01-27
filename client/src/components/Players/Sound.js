@@ -2,45 +2,58 @@ import React from "react";
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
 
+import { updateGlobalPlay } from "../../redux/sounds";
+import { useDispatch, useSelector } from "react-redux";
+
 import findIcon from "../../utils/iconSort";
 import {
   updateLocalStorage,
   checkLocalStorage,
 } from "../../utils/updateLocalStorage";
 
-const Sound = ({ id, name, path, stop }) => {
-  // initialise sound and volume
-  // we store state in local storage so check there
+const Sound = ({ id, name, path, stopped }) => {
+  /* 
+    - useSound gives us a function and the Howl from Howler
+    - Howl methods can be called on the sound object
+    - the path provided is the sound to be played, and we send options
+    - state for the sounds is stored in localStorage, so check there
+  */
+
+  // on first render, set the playing to be false
+  useEffect(() => {
+    updateLocalStorage("playing", false, id);
+  }, [id]);
+
   const [play, { sound }] = useSound(path, {
     volume: parseFloat(checkLocalStorage("volume", 0.5, id)),
   });
 
-  const [playing, setPlaying] = useState(
-    checkLocalStorage("playing", false, id)
-  );
+  const [playing, setPlaying] = useState(false);
 
   const [volume, setVolume] = useState(
     parseFloat(checkLocalStorage("volume", 0.5, id))
   );
 
+  const dispatch = useDispatch();
+  const globalPlay = useSelector((state) => state.sounds.globalPlay);
   const icon = findIcon(name);
-
-  useEffect(() => {
-    stop ? setPlaying(false) : setPlaying(true);
-  }, [stop, sound]);
 
   const playSound = () => {
     if (volume === 0) {
+      // if there is no volume on this sound then just keep it paused
       setPlaying(false);
+      sound.pause();
+      console.log("set it to play");
       updateLocalStorage("playing", playing, id);
       return;
     }
 
     if (!playing) {
-      // sound.fade(0, volume, 2000);
-      console.log(playing);
+      console.log("playing should now be set to", !playing);
       updateLocalStorage("playing", !playing, id);
+      // dispatch(updateGlobalPlay(true));
       setPlaying(true);
+
       play();
       sound.loop(true);
     }
@@ -53,12 +66,6 @@ const Sound = ({ id, name, path, stop }) => {
     updateLocalStorage("volume", value, id);
     setVolume(inputValue);
     sound.volume(inputValue);
-
-    if (inputValue === 0) {
-      setPlaying(false);
-      updateLocalStorage("playing", playing, id);
-      sound.pause();
-    }
   };
 
   return (

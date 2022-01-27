@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { setEmail, setUsername } from "../../redux/auth";
 import Input from "../Forms/Input";
+import { BsColumnsGap } from "react-icons/bs";
 
 const LoginForm = () => {
   const [error, setError] = useState(null);
@@ -27,6 +28,7 @@ const LoginForm = () => {
       );
 
       const userData = res.data.userData;
+      console.log(res);
 
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));

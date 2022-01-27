@@ -27,6 +27,8 @@ const login = async (req, res, next) => {
     res.status(200).json({
       success: true,
       userData: req.session.userData,
+      ip: req.socket.remoteAddress,
+      proxyIp: `helo${req.headers["x-forwarded-for"]}`,
       message: "Logged in successfully",
     });
   } catch (error) {

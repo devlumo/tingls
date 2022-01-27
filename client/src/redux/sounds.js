@@ -13,11 +13,16 @@ const soundSlice = createSlice({
   initialState: {
     sounds: [],
     status: null,
+    globalPlay: false,
   },
   reducers: {
     updateVolume(state, action) {
       state.sounds.find((sound) => sound._id === action.payload.id).volume =
         action.payload.volume;
+    },
+
+    updateGlobalPlay(state, action) {
+      state.globalPlay = action.payload;
     },
   },
   extraReducers: {
@@ -34,5 +39,5 @@ const soundSlice = createSlice({
   },
 });
 
-export const { updateVolume } = soundSlice.actions;
+export const { updateVolume, updateGlobalPlay } = soundSlice.actions;
 export default soundSlice.reducer;

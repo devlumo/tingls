@@ -21,6 +21,7 @@ const updateLocalStorage = (property, value, id) => {
     if (getCurrentObject) {
       const index = state.indexOf(getCurrentObject);
       state[index][property] = value;
+      console.log(value, property);
       localStorage.setItem("sound-state", JSON.stringify(state));
     } else {
       state.push({ id: id, [property]: value });

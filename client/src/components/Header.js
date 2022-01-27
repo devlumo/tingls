@@ -22,7 +22,8 @@ const Header = () => {
         dispatch(setUsername(userData.username));
         dispatch(setEmail(userData.email));
       } catch (error) {
-        console.log(error);
+        return;
+        //console.log(error);
       }
     };
     getUser();
