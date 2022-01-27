@@ -3,7 +3,6 @@ import Sound from "./Sound";
 import { getSounds, updateGlobalPlay } from "../../redux/sounds";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FaVolumeMute, FaVolumeUp, FaStop, FaPlay } from "react-icons/fa";
 import { updateLocalStorage } from "../../utils/updateLocalStorage";
 
 const PlayersContainer = () => {
@@ -11,8 +10,7 @@ const PlayersContainer = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
-  // const [mute, setMute] = useState(false);
-  // const [stopped, setStop] = useState(!selectGlobalPlay);
+  const [mute, setMute] = useState(false);
 
   useEffect(() => {
     // trigger redux thunk request
@@ -23,10 +21,11 @@ const PlayersContainer = () => {
   const selectSounds = useSelector((state) => state.sounds.sounds);
   console.log(selectSounds, "playercontainer");
 
-  // const handleMute = () => {
-  //   setMute(!mute);
-  //   window.Howler.mute(!mute);
-  // };
+  const handleMute = () => {
+    setMute(!mute);
+    console.log("mute");
+    window.Howler.mute(!mute);
+  };
 
   // const handleStop = () => {
   //   // check if there is any sound playing, if not, lets start
@@ -61,6 +60,7 @@ const PlayersContainer = () => {
           );
         })
       )}
+      <button onClick={handleMute}>{mute ? "unmute" : "mute"}</button>
     </div>
   );
 };

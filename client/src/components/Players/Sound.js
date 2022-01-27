@@ -19,7 +19,7 @@ const Sound = ({ id, name, path, stopped }) => {
     - state for the sounds is stored in localStorage, so check there
   */
 
-  // on first render, set the playing to be false
+  // on first render
   useEffect(() => {
     updateLocalStorage("playing", false, id);
   }, [id]);
@@ -39,11 +39,11 @@ const Sound = ({ id, name, path, stopped }) => {
   const icon = findIcon(name);
 
   const playSound = () => {
+    console.log(window.Howler);
     if (volume === 0) {
       // if there is no volume on this sound then just keep it paused
       setPlaying(false);
       sound.pause();
-      console.log("set it to play");
       updateLocalStorage("playing", playing, id);
       return;
     }
