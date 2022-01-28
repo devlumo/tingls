@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
 
-import { updateGlobalPlay } from "../../redux/sounds";
 import { useDispatch, useSelector } from "react-redux";
 
 import findIcon from "../../utils/iconSort";

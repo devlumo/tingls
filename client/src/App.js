@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 import Login from "./pages/Login";
+import { SoundHub } from "./components/Hub/SoundHub";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route exact path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <SoundHub></SoundHub>
     </div>
   );
 };
