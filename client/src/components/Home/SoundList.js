@@ -24,7 +24,9 @@ const SoundList = () => {
         <p>Loading</p>
       ) : (
         selectSounds.map((el) => {
-          return <SoundItem key={el._id} name={el.name} id={el._id} />;
+          return (
+            <SoundItem key={el._id} name={el.name} id={el._id} path={el.path} />
+          );
         })
       )}
     </div>

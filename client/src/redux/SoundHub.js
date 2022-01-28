@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentSounds: [],
+  count: 0,
 };
 
 const hubSlice = createSlice({
@@ -10,6 +11,7 @@ const hubSlice = createSlice({
   reducers: {
     addHubSound(state, action) {
       state.currentSounds.push(action.payload);
+      state.count = state.currentSounds.length;
     },
     removeHubSound(state, action) {
       let currentSound = state.currentSounds.indexOf(
@@ -17,6 +19,7 @@ const hubSlice = createSlice({
       );
       if (currentSound > -1) {
         state.currentSounds.splice(currentSound, 1);
+        state.count = state.currentSounds.length;
       }
     },
   },

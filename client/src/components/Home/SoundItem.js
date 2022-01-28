@@ -6,7 +6,12 @@ export const SoundItem = ({ id, name, path }) => {
   const dispatch = useDispatch();
 
   const addToHub = () => {
-    dispatch(addHubSound(id));
+    const soundObject = {
+      id,
+      path,
+      name,
+    };
+    dispatch(addHubSound(soundObject));
   };
   return (
     <div className="bg-white p-6 rounded-lg shadow-md w-1/5">
