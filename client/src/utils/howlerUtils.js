@@ -7,4 +7,20 @@ const removeHowl = (path) => {
   window.Howler._howls = howls.filter((howl) => howl !== howlToRemove);
 };
 
-export { removeHowl };
+const pauseAllHowls = () => {
+  let howls = window.Howler._howls;
+
+  for (let i = 0; i < howls.length; i++) {
+    howls[i].pause();
+  }
+};
+
+const playAllHowls = () => {
+  let howls = window.Howler._howls;
+
+  for (let i = 0; i < howls.length; i++) {
+    howls[i].play();
+  }
+};
+
+export { removeHowl, pauseAllHowls, playAllHowls };
