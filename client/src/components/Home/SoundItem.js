@@ -1,15 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addHubSound, removeHubSound } from "../../redux/SoundHub";
+import { addHubSound, removeHubSound } from "../../redux/hub";
 
 export const SoundItem = ({ id, name, path }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
-  const [added, setAdded] = useState(
-    Boolean(
-      useSelector((state) =>
-        state.soundHub.currentSounds.find((sound) => sound.id === id)
-      )
+  const added = Boolean(
+    useSelector((state) =>
+      state.soundHub.currentSounds.find((sound) => sound.id === id)
     )
   );
 
@@ -23,13 +21,11 @@ export const SoundItem = ({ id, name, path }) => {
       name,
     };
     dispatch(addHubSound(soundObject));
-    setAdded(true);
   };
 
   // remove sounds from the Hub
   const removeFromHub = () => {
-    dispatch(removeHubSound(id));
-    setAdded(false);
+    dispatch(removeHubSound({ id, path }));
   };
 
   return (

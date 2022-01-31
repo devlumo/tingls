@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { removeHowl } from "../utils/howlerUtils";
 
 // TODO: Get the local storage, move into its own component
 if (!localStorage.getItem("app_state")) {
@@ -48,10 +49,13 @@ const hubSlice = createSlice({
       const storedState = JSON.parse(localStorage.getItem("app_state"));
 
       let currentSound = state.currentSounds.indexOf(
-        state.currentSounds.find((sound) => sound.id === action.payload)
+        state.currentSounds.find((sound) => sound.id === action.payload.id)
       );
       if (currentSound > -1) {
         state.currentSounds.splice(currentSound, 1);
+
+        // remove the howl from global howler object
+        removeHowl(action.payload.path);
         state.count = state.currentSounds.length;
 
         // update local storage with new sounds array

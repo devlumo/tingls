@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import Sound from "../Hub/Sound";
 
 export const SoundHub = () => {
