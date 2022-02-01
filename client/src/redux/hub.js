@@ -45,6 +45,7 @@ const hubSlice = createSlice({
         return;
       }
     },
+
     removeHubSound(state, action) {
       const storedState = JSON.parse(localStorage.getItem("app_state"));
 
@@ -63,8 +64,36 @@ const hubSlice = createSlice({
         localStorage.setItem("app_state", JSON.stringify(storedState));
       }
     },
+
+    updateMute(state, action) {
+      // get the stored state and check if the current sound exists there
+      const storedState = JSON.parse(localStorage.getItem("app_state"));
+      const currentSound = storedState.hubSounds.find(
+        (sound) => sound.id === action.payload.id
+      );
+
+      // set the muted status toggle
+      if (!currentSound.muted) {
+        currentSound.muted = true;
+      } else {
+        currentSound.muted = false;
+      }
+
+      // getting the index of the redux state to update
+      let currentIndex = state.currentSounds.indexOf(
+        state.currentSounds.find((sound) => sound.id === action.payload.id)
+      );
+
+      if (currentIndex > -1) {
+        state.currentSounds.splice(currentIndex, 1, currentSound);
+
+        // update local storage with new sounds array
+        storedState.hubSounds = state.currentSounds;
+        localStorage.setItem("app_state", JSON.stringify(storedState));
+      }
+    },
   },
 });
 
-export const { addHubSound, removeHubSound } = hubSlice.actions;
+export const { addHubSound, removeHubSound, updateMute } = hubSlice.actions;
 export default hubSlice.reducer;
