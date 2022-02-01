@@ -1,3 +1,8 @@
+/* 
+    howlerUtils
+    - contains functions that interact directly with the Howler object 
+*/
+
 const removeHowl = (path) => {
   let howls = window.Howler._howls;
   const howlToRemove = howls.find((howl) => howl._src === path);

@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { useState, useEffect } from "react";
 import Sound from "../Hub/Sound";
 import { playAllHowls, pauseAllHowls } from "../../utils/howlerUtils";
 import { updateHubPlaying } from "../../redux/hub";
+import SaveMix from "../Mixes/SaveMix";
 
 export const SoundHub = () => {
   const [globalPlay, setGlobalPlay] = useState(false);
+
   const sounds = useSelector((state) => state.soundHub.currentSounds);
   const dispatch = useDispatch();
 
@@ -39,9 +40,15 @@ export const SoundHub = () => {
           );
         })}
       </div>
-      <button onClick={handleGlobalPlay}>
-        {globalPlay ? "Pause" : "Play"}
-      </button>
+      <div className="flex justify-center items-center">
+        <button
+          className="rounded text-sm bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white"
+          onClick={handleGlobalPlay}
+        >
+          {globalPlay ? "Pause" : "Play"}
+        </button>
+        <SaveMix />
+      </div>
     </div>
   );
 };

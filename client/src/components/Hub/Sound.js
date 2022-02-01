@@ -7,6 +7,8 @@ import { removeHubSound, updateMute, updateVolume } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
 const Sound = ({ id, name, path }) => {
+  const dispatch = useDispatch();
+
   const muteStatus = useSelector(
     (state) =>
       state.soundHub.currentSounds.find((sound) => sound.id === id).muted
@@ -15,13 +17,15 @@ const Sound = ({ id, name, path }) => {
     (state) =>
       state.soundHub.currentSounds.find((sound) => sound.id === id).volume
   );
-
   const hubPlaying = useSelector((state) => state.soundHub.hubPlay);
+
+  // TODO: muted and volume are redundant as state is stored in redux
   const [muted, setMute] = useState(muteStatus);
   const [volume, setVolume] = useState(parseFloat(storedVolume));
-  const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false);
-  const [fade, { sound }] = useSound(path, {
+
+  // useSound hook creates a new Howl Object and attaches it to the Howler Object
+  const [play, { sound }] = useSound(path, {
     volume: volume,
   });
 
@@ -56,8 +60,7 @@ const Sound = ({ id, name, path }) => {
   };
 
   const handleVolume = (e) => {
-    let { value } = e.target;
-    let inputValue = parseFloat(value);
+    let inputValue = parseFloat(e.target.value);
 
     dispatch(updateVolume({ id, volume: inputValue }));
     setVolume(inputValue);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
@@ -12,6 +12,7 @@ export const SoundItem = ({ id, name, path }) => {
     )
   );
 
+  const hubPlaying = useSelector((state) => state.soundHub.hubPlay);
   const dispatch = useDispatch();
 
   // add the sound object to the Hub
@@ -22,8 +23,13 @@ export const SoundItem = ({ id, name, path }) => {
       name,
       volume: 0,
     };
+
     dispatch(addHubSound(soundObject));
-    playAllHowls();
+
+    // only auto play the added sound if the hub is playing others
+    if (hubPlaying) {
+      playAllHowls();
+    }
   };
 
   // remove sounds from the Hub
