@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
+import { playAllHowls } from "../../utils/howlerUtils";
 
 export const SoundItem = ({ id, name, path }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
@@ -19,8 +20,10 @@ export const SoundItem = ({ id, name, path }) => {
       id,
       path,
       name,
+      volume: 0,
     };
     dispatch(addHubSound(soundObject));
+    playAllHowls();
   };
 
   // remove sounds from the Hub

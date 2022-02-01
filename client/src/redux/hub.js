@@ -14,9 +14,12 @@ if (!localStorage.getItem("app_state")) {
 
 // Get the initial state from local storage
 const storedState = JSON.parse(localStorage.getItem("app_state"));
+storedState.hubPlay = false;
+localStorage.setItem("app_state", JSON.stringify(storedState));
 
 const initialState = {
   currentSounds: [...storedState.hubSounds],
+  hubPlay: false,
   count: 0,
 };
 
@@ -92,8 +95,42 @@ const hubSlice = createSlice({
         localStorage.setItem("app_state", JSON.stringify(storedState));
       }
     },
+
+    updateVolume(state, action) {
+      const storedState = JSON.parse(localStorage.getItem("app_state"));
+      const currentSound = storedState.hubSounds.find(
+        (sound) => sound.id === action.payload.id
+      );
+
+      currentSound.volume = action.payload.volume;
+
+      let currentIndex = state.currentSounds.indexOf(
+        state.currentSounds.find((sound) => sound.id === action.payload.id)
+      );
+
+      if (currentIndex > -1) {
+        state.currentSounds.splice(currentIndex, 1, currentSound);
+
+        // update local storage with new sounds array
+        storedState.hubSounds = state.currentSounds;
+        localStorage.setItem("app_state", JSON.stringify(storedState));
+      }
+    },
+
+    updateHubPlaying(state, action) {
+      const storedState = JSON.parse(localStorage.getItem("app_state"));
+      storedState.hubPlay = action.payload;
+      state.hubPlay = action.payload;
+      localStorage.setItem("app_state", JSON.stringify(storedState));
+    },
   },
 });
 
-export const { addHubSound, removeHubSound, updateMute } = hubSlice.actions;
+export const {
+  addHubSound,
+  removeHubSound,
+  updateMute,
+  updateVolume,
+  updateHubPlaying,
+} = hubSlice.actions;
 export default hubSlice.reducer;

@@ -19,7 +19,13 @@ const playAllHowls = () => {
   let howls = window.Howler._howls;
 
   for (let i = 0; i < howls.length; i++) {
-    howls[i].play();
+    // if the sound is paused (default) then play
+    if (howls[i]._sounds[0]._paused) {
+      howls[i].play();
+
+      // loop must be set to true via the sounds array in each howl
+      howls[i]._sounds[0]._loop = true;
+    }
   }
 };
 

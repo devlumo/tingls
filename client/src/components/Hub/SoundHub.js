@@ -1,20 +1,24 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { useState, useEffect } from "react";
 import Sound from "../Hub/Sound";
 import { playAllHowls, pauseAllHowls } from "../../utils/howlerUtils";
+import { updateHubPlaying } from "../../redux/hub";
 
 export const SoundHub = () => {
   const [globalPlay, setGlobalPlay] = useState(false);
   const sounds = useSelector((state) => state.soundHub.currentSounds);
+  const dispatch = useDispatch();
 
   const handleGlobalPlay = () => {
     if (!globalPlay) {
       setGlobalPlay(true);
+      dispatch(updateHubPlaying(true));
       playAllHowls();
     } else {
       setGlobalPlay(false);
+      dispatch(updateHubPlaying(false));
       pauseAllHowls();
     }
   };
