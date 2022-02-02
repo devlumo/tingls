@@ -123,6 +123,20 @@ const hubSlice = createSlice({
       state.hubPlay = action.payload;
       localStorage.setItem("app_state", JSON.stringify(storedState));
     },
+
+    loadMix(state, action) {
+      const storedState = JSON.parse(localStorage.getItem("app_state"));
+      storedState.hubPlay = false;
+      state.hubPlay = false;
+
+      storedState.hubSounds = JSON.parse(action.payload);
+
+      // make the currentSounds empty first to remove and replace existing howls
+      console.log(action.payload);
+      state.currentSounds = JSON.parse(action.payload);
+
+      localStorage.setItem("app_state", JSON.stringify(storedState));
+    },
   },
 });
 
@@ -132,5 +146,6 @@ export const {
   updateMute,
   updateVolume,
   updateHubPlaying,
+  loadMix,
 } = hubSlice.actions;
 export default hubSlice.reducer;

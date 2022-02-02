@@ -5,18 +5,19 @@
 
 const removeHowl = (path) => {
   let howls = window.Howler._howls;
+  console.log("remove", path);
   const howlToRemove = howls.find((howl) => howl._src === path);
-  howlToRemove.pause();
-
+  console.log("remove ", howlToRemove);
   // update the global object to only hold the howls we need
   window.Howler._howls = howls.filter((howl) => howl !== howlToRemove);
 };
 
 const pauseAllHowls = () => {
-  let howls = window.Howler._howls;
-
-  for (let i = 0; i < howls.length; i++) {
-    howls[i].pause();
+  if (window.Howler) {
+    let howls = window.Howler._howls;
+    for (let i = 0; i < howls.length; i++) {
+      howls[i].pause();
+    }
   }
 };
 
@@ -34,4 +35,27 @@ const playAllHowls = () => {
   }
 };
 
-export { removeHowl, pauseAllHowls, playAllHowls };
+// check if the new data contains any of the current howls, if it doesn't contain them then remove them from Howler
+const removePreviousHowls = (data) => {
+  if (window.Howler) {
+    let howls = window.Howler._howls;
+    let howlsToRemove = [];
+
+    for (let i = 0; i < howls.length; i++) {
+      let match = false;
+      for (let j = 0; j < data.length; j++) {
+        if (howls[i]._src === data[j].path) {
+          match = true;
+          break;
+        }
+      }
+      if (!match) {
+        howlsToRemove.push(howls[i]._src);
+      }
+    }
+
+    howlsToRemove.forEach((item) => removeHowl(item));
+  }
+};
+
+export { removeHowl, pauseAllHowls, playAllHowls, removePreviousHowls };

@@ -7,18 +7,15 @@ import { updateHubPlaying } from "../../redux/hub";
 import SaveMix from "../Mixes/SaveMix";
 
 export const SoundHub = () => {
-  const [globalPlay, setGlobalPlay] = useState(false);
-
+  const hubPlay = useSelector((state) => state.soundHub.hubPlay);
   const sounds = useSelector((state) => state.soundHub.currentSounds);
   const dispatch = useDispatch();
 
-  const handleGlobalPlay = () => {
-    if (!globalPlay) {
-      setGlobalPlay(true);
+  const handleHubPlay = () => {
+    if (!hubPlay) {
       dispatch(updateHubPlaying(true));
       playAllHowls();
     } else {
-      setGlobalPlay(false);
       dispatch(updateHubPlaying(false));
       pauseAllHowls();
     }
@@ -43,9 +40,9 @@ export const SoundHub = () => {
       <div className="flex justify-center items-center">
         <button
           className="rounded text-sm bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white"
-          onClick={handleGlobalPlay}
+          onClick={handleHubPlay}
         >
-          {globalPlay ? "Pause" : "Play"}
+          {hubPlay ? "Pause" : "Play"}
         </button>
         <SaveMix />
       </div>

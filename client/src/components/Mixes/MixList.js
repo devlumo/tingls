@@ -18,7 +18,7 @@ const MixList = () => {
 
   const selectMixes = useSelector((state) => state.mixes.mixes);
   return (
-    <div className="flex-col justify-center w-1/3 items-center space-y-3">
+    <div className="flex-col justify-center w-1/2 items-center space-y-3">
       {loading ? (
         <p>Loading</p>
       ) : (

@@ -3,8 +3,7 @@ import MixList from "./MixList";
 
 const MixContainer = () => {
   return (
-    <div>
-      <h2 className="text-md block">Tingls</h2>
+    <div className="flex w-1/3">
       <MixList />
     </div>
   );
