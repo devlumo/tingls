@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { getSounds } from "../../redux/sounds";
+import React from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { SoundItem } from "./SoundItem";
+import { getMixes } from "../../redux/mixes";
+import MixItem from "./MixItem";
 
-const SoundList = () => {
+const MixList = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // trigger redux thunk request
-    dispatch(getSounds());
+    dispatch(getMixes());
     setLoading(false);
   }, [dispatch]);
 
-  const selectSounds = useSelector((state) => state.sounds.sounds);
-
+  const selectMixes = useSelector((state) => state.mixes.mixes);
   return (
     <div className="flex-col justify-center w-1/3 items-center space-y-3">
       {loading ? (
         <p>Loading</p>
       ) : (
-        selectSounds.map((el) => {
+        selectMixes.map((el) => {
           return (
-            <SoundItem key={el._id} name={el.name} id={el._id} path={el.path} />
+            <MixItem key={el._id} name={el.name} id={el._id} data={el.data} />
           );
         })
       )}
@@ -32,4 +32,4 @@ const SoundList = () => {
   );
 };
 
-export default SoundList;
+export default MixList;

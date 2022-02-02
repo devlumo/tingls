@@ -15,4 +15,16 @@ const createMix = async (req, res, next) => {
   }
 };
 
-export { createMix };
+const getAllMixes = async (req, res, next) => {
+  try {
+    const mixes = await Mix.find();
+    res.status(200).json({
+      success: true,
+      mixes,
+    });
+  } catch (error) {
+    next(new ApiError("Something went wrong", 400));
+  }
+};
+
+export { createMix, getAllMixes };

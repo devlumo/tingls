@@ -34,13 +34,6 @@ const Header = () => {
       <span className="text-white text-xl">
         <Link to="/">tingls.io</Link>
       </span>
-      <span>
-        <img
-          src={mandala}
-          alt="oops"
-          className="w-12 h-12 hover:animate-spin"
-        ></img>
-      </span>
       <ul className="flex space-x-8 text-white text-md pr-4">
         <li className="text-white text-md">
           {userName ? userName.toLowerCase() : <Link to="/login">login</Link>}

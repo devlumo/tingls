@@ -25,8 +25,8 @@ export const SoundHub = () => {
   };
 
   return (
-    <div className="bg-green-700 text-3xl text-white text-center fixed bottom-0 w-full flex-col justify-center items-center">
-      Sound Hub Container
+    <div className="bg-green-700 text-md text-white text-center fixed bottom-0 w-full flex-col justify-center items-center">
+      Hub
       <div className="flex justify-center items-center">
         Sounds
         {sounds.map((sound) => {

@@ -70,9 +70,9 @@ const Sound = ({ id, name, path }) => {
   return (
     <div className="bg-white p-2 flex justify-center items-center m-2 text-black">
       {!muted ? (
-        <FaVolumeUp className="p-2" onClick={handleMute} />
+        <FaVolumeUp onClick={handleMute} />
       ) : (
-        <FaVolumeMute className="p-2" onClick={handleMute} />
+        <FaVolumeMute onClick={handleMute} />
       )}
       <span className="text-sm p-1">{name}</span>
       <button className="text-sm p-1" onClick={handleRemove}>

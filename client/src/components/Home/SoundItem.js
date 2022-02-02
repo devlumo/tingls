@@ -38,7 +38,7 @@ export const SoundItem = ({ id, name, path }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md w-1/5">
+    <div className="bg-white p-6 rounded-lg shadow-md w-full">
       {name}
       {!added ? (
         <button
