@@ -5,9 +5,8 @@
 
 const removeHowl = (path) => {
   let howls = window.Howler._howls;
-  console.log("remove", path);
   const howlToRemove = howls.find((howl) => howl._src === path);
-  console.log("remove ", howlToRemove);
+
   // update the global object to only hold the howls we need
   window.Howler._howls = howls.filter((howl) => howl !== howlToRemove);
 };
@@ -58,4 +57,27 @@ const removePreviousHowls = (data) => {
   }
 };
 
-export { removeHowl, pauseAllHowls, playAllHowls, removePreviousHowls };
+const pauseHowl = (path) => {
+  let howls = window.Howler._howls;
+  const howlToPause = howls.find((howl) => howl._src === path);
+  const howlToPauseIndex = howls.indexOf(howlToPause);
+  howls[howlToPauseIndex].pause();
+};
+
+const getHowlCount = () => {
+  if (window.Howler) {
+    let howls = window.Howler._howls;
+    return howls.length;
+  } else {
+    return 0;
+  }
+};
+
+export {
+  removeHowl,
+  pauseAllHowls,
+  playAllHowls,
+  removePreviousHowls,
+  pauseHowl,
+  getHowlCount,
+};

@@ -20,29 +20,26 @@ const Sound = ({ id, name, path }) => {
   const hubPlaying = useSelector((state) => state.soundHub.hubPlay);
 
   // TODO: muted and volume are redundant as state is stored in redux
-  const [muted, setMute] = useState(muteStatus);
   const [volume, setVolume] = useState(parseFloat(storedVolume));
   const [playing, setPlaying] = useState(false);
 
   // useSound hook creates a new Howl Object and attaches it to the Howler Object
   const [play, { sound }] = useSound(path, {
     volume: volume,
+    mute: muteStatus,
   });
 
   const handleMute = () => {
-    if (!muted) {
+    if (!muteStatus) {
       dispatch(updateMute({ path, id }));
-      setMute(!muted);
-      sound.mute(!muted);
+      sound.mute(!muteStatus);
     } else {
       dispatch(updateMute({ path, id }));
-      setMute(!muted);
-      sound.mute(!muted);
+      sound.mute(!muteStatus);
     }
   };
 
   const handleRemove = () => {
-    sound.pause();
     dispatch(removeHubSound({ id, path }));
   };
 
@@ -69,7 +66,7 @@ const Sound = ({ id, name, path }) => {
 
   return (
     <div className="bg-white p-2 flex justify-center items-center m-2 text-black">
-      {!muted ? (
+      {!muteStatus ? (
         <FaVolumeUp onClick={handleMute} />
       ) : (
         <FaVolumeMute onClick={handleMute} />

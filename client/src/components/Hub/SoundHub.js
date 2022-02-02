@@ -2,7 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Sound from "../Hub/Sound";
-import { playAllHowls, pauseAllHowls } from "../../utils/howlerUtils";
+import {
+  playAllHowls,
+  pauseAllHowls,
+  getHowlCount,
+} from "../../utils/howlerUtils";
 import { updateHubPlaying } from "../../redux/hub";
 import SaveMix from "../Mixes/SaveMix";
 
@@ -12,7 +16,7 @@ export const SoundHub = () => {
   const dispatch = useDispatch();
 
   const handleHubPlay = () => {
-    if (!hubPlay) {
+    if (!hubPlay && getHowlCount() > 0) {
       dispatch(updateHubPlaying(true));
       playAllHowls();
     } else {
