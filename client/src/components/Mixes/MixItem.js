@@ -1,14 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { loadMix } from "../../redux/hub";
-import { pauseAllHowls, removePreviousHowls } from "../../utils/howlerUtils";
 
 const MixItem = ({ id, name, data }) => {
   const dispatch = useDispatch();
 
   const handleLoadMix = () => {
-    pauseAllHowls();
-    removePreviousHowls(JSON.parse(data));
     dispatch(loadMix(data));
   };
   return (

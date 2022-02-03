@@ -22,9 +22,23 @@ const pauseAllHowls = () => {
 
 const playAllHowls = () => {
   let howls = window.Howler._howls;
+  const storedState = JSON.parse(localStorage.getItem("app_state"));
 
   for (let i = 0; i < howls.length; i++) {
     // if the sound is paused (default) then play
+
+    let currentSound = storedState.hubSounds.find(
+      (sound) => sound.path === howls[i]._src
+    );
+
+    if (currentSound.muted) {
+      howls[i].mute(true);
+      console.log("muted", currentSound.name);
+    } else {
+      howls[i].mute(false);
+      console.log("unmuted", currentSound.name);
+    }
+
     if (howls[i]._sounds[0]._paused) {
       howls[i].play();
 
@@ -73,6 +87,14 @@ const getHowlCount = () => {
   }
 };
 
+const removeAllHowls = () => {
+  if (window.Howler) {
+    window.Howler._howls = [];
+    console.log("howls removed");
+    window.Howler = null;
+  }
+};
+
 export {
   removeHowl,
   pauseAllHowls,
@@ -80,4 +102,5 @@ export {
   removePreviousHowls,
   pauseHowl,
   getHowlCount,
+  removeAllHowls,
 };

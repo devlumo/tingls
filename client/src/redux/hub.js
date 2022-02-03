@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { pauseHowl, removeHowl } from "../utils/howlerUtils";
+import {
+  pauseHowl,
+  removeHowl,
+  removeAllHowls,
+  pauseAllHowls,
+  removePreviousHowls,
+} from "../utils/howlerUtils";
 
 // TODO: Get the local storage, move into its own component
 if (!localStorage.getItem("app_state")) {
@@ -126,6 +132,8 @@ const hubSlice = createSlice({
     },
 
     loadMix(state, action) {
+      pauseAllHowls();
+      removePreviousHowls(JSON.parse(action.payload));
       const storedState = JSON.parse(localStorage.getItem("app_state"));
       storedState.hubPlay = false;
       state.hubPlay = false;
