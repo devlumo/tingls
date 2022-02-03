@@ -33,17 +33,17 @@ const playAllHowls = () => {
 
     if (currentSound.muted) {
       howls[i].mute(true);
-      console.log("muted", currentSound.name);
     } else {
       howls[i].mute(false);
-      console.log("unmuted", currentSound.name);
     }
 
     if (howls[i]._sounds[0]._paused) {
-      howls[i].play();
-
       // loop must be set to true via the sounds array in each howl
       howls[i]._sounds[0]._loop = true;
+      howls[i]._loop = true;
+
+      // all settings need to be made before the sound is played, so .play() must be last
+      howls[i].play();
     }
   }
 };
@@ -52,21 +52,13 @@ const playAllHowls = () => {
 const removePreviousHowls = (data) => {
   if (window.Howler) {
     let howls = window.Howler._howls;
-    let howlsToRemove = [];
 
-    for (let i = 0; i < howls.length; i++) {
-      let match = false;
-      for (let j = 0; j < data.length; j++) {
-        if (howls[i]._src === data[j].path) {
-          match = true;
-          break;
-        }
-      }
-      if (!match) {
-        howlsToRemove.push(howls[i]._src);
-      }
-    }
+    const getHowls = howls.filter(
+      (howl) => !data.find((data) => howl._src === data.path)
+    );
+    const howlsToRemove = getHowls.map((howl) => howl._src);
 
+    // run the remove howl function on each howl
     howlsToRemove.forEach((item) => removeHowl(item));
   }
 };
@@ -90,8 +82,6 @@ const getHowlCount = () => {
 const removeAllHowls = () => {
   if (window.Howler) {
     window.Howler._howls = [];
-    console.log("howls removed");
-    window.Howler = null;
   }
 };
 

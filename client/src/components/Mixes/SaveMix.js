@@ -6,6 +6,10 @@ const SaveMix = () => {
     try {
       const app_state = JSON.parse(localStorage.getItem("app_state"));
       const data = JSON.stringify(app_state.hubSounds);
+
+      if (!app_state.hubSounds.length) {
+        throw new Error("There are no sounds added!");
+      }
       const name = "Test1";
 
       const res = await axios.post(

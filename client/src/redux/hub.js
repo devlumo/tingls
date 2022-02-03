@@ -69,9 +69,18 @@ const hubSlice = createSlice({
         removeHowl(action.payload.path);
         state.count = state.currentSounds.length;
 
-        // update local storage with new sounds array
-        storedState.hubSounds = state.currentSounds;
-        localStorage.setItem("app_state", JSON.stringify(storedState));
+        // if there are no sounds in the hubPlay to false
+        if (state.count < 1) {
+          storedState.hubSounds = state.currentSounds;
+          storedState.hubPlay = false;
+          state.hubPlay = false;
+
+          localStorage.setItem("app_state", JSON.stringify(storedState));
+        } else {
+          // update local storage with new sounds array
+          storedState.hubSounds = state.currentSounds;
+          localStorage.setItem("app_state", JSON.stringify(storedState));
+        }
       }
     },
 
