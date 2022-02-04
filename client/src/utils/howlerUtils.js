@@ -1,6 +1,7 @@
 /* 
     howlerUtils
-    - contains functions that interact directly with the Howler object 
+    - contains functions that interact directly with the Howler object
+    - Howler Object needs to be initialised for these functions to run
 */
 
 const removeHowl = (path) => {
@@ -31,6 +32,7 @@ const playAllHowls = () => {
       (sound) => sound.path === howls[i]._src
     );
 
+    // set mute - mute does not work in useSound hook options
     if (currentSound.muted) {
       howls[i].mute(true);
     } else {
@@ -38,6 +40,8 @@ const playAllHowls = () => {
     }
 
     if (howls[i]._sounds[0]._paused) {
+      // ** ADDITIONAL HOWL OPTIONS CAN BE SET HERE - https://github.com/goldfire/howler.js#options **
+
       // loop must be set to true via the sounds array in each howl
       howls[i]._sounds[0]._loop = true;
       howls[i]._loop = true;

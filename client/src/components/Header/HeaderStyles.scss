@@ -1,0 +1,21 @@
+.header {
+  background: #707070;
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  .header-menu {
+    color: white;
+
+    .menu {
+      list-style-type: none;
+      display: flex;
+
+      .menu-item {
+        padding: 10px;
+      }
+    }
+  }
+}
