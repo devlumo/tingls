@@ -1,4 +1,5 @@
 .hub {
-  background: #c9c9c9;
   grid-area: hub;
+  border-left: 2px solid var(--secondary-bg);
+  padding: 10px;
 }

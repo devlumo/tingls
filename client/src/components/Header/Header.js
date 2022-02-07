@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setEmail, setUsername } from "../../redux/auth";
 import { useEffect } from "react";
 
+import { motion } from "framer-motion/dist/framer-motion";
+
 import "./HeaderStyles.scss";
 
 const Header = () => {
@@ -37,9 +39,15 @@ const Header = () => {
       </div>
       <div className="header-menu">
         <ul className="menu">
-          <li className="menu-item">
+          <motion.li
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 },
+            }}
+            className="menu-item"
+          >
             {userName ? userName.toLowerCase() : <Link to="/login">login</Link>}
-          </li>
+          </motion.li>
           <li className="menu-item">about</li>
         </ul>
       </div>

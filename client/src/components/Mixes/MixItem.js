@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { loadMix } from "../../redux/hub";
+import { motion } from "framer-motion/dist/framer-motion";
+import "./MixItemStyles.scss";
 
 const MixItem = ({ id, name, data }) => {
   const dispatch = useDispatch();
@@ -9,15 +11,16 @@ const MixItem = ({ id, name, data }) => {
     dispatch(loadMix(data));
   };
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md w-full">
+    <motion.div
+      animate={{ opacity: [0, 1] }}
+      transition={{ duration: 0.2 }}
+      className="mix-item"
+    >
       {name}
-      <button
-        onClick={handleLoadMix}
-        className="bg-gray-400 float-right p-1 rounded-lg text-white"
-      >
+      <button onClick={handleLoadMix} className="">
         Add
       </button>
-    </div>
+    </motion.div>
   );
 };
 

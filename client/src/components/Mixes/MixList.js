@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getMixes } from "../../redux/mixes";
 import MixItem from "./MixItem";
+import "./MixListStyles.scss";
 
 const MixList = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const MixList = () => {
 
   const selectMixes = useSelector((state) => state.mixes.mixes);
   return (
-    <div className="flex-col justify-center w-1/2 items-center space-y-3">
+    <div className="mix-wrapper">
       {loading ? (
         <p>Loading</p>
       ) : (

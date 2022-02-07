@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
+import { BsSoundwave } from "react-icons/bs";
+import { motion } from "framer-motion/dist/framer-motion";
+
+import "./SoundItemStyles.scss";
+
 export const SoundItem = ({ id, name, path }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
   const added = Boolean(
@@ -38,23 +43,22 @@ export const SoundItem = ({ id, name, path }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md w-full">
+    <motion.div
+      animate={{ opacity: [0, 1] }}
+      transition={{ duration: 0.2 }}
+      className="sound-item"
+    >
+      <BsSoundwave />
       {name}
       {!added ? (
-        <button
-          onClick={addToHub}
-          className="bg-gray-400 float-right p-1 rounded-lg text-white"
-        >
+        <button onClick={addToHub} className="">
           Add
         </button>
       ) : (
-        <button
-          onClick={removeFromHub}
-          className="bg-red-400 float-right p-1 rounded-lg text-white"
-        >
+        <button onClick={removeFromHub} className="">
           Remove
         </button>
       )}
-    </div>
+    </motion.div>
   );
 };

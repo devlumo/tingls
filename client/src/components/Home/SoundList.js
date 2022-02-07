@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { SoundItem } from "./SoundItem";
 
+import "./SoundList.scss";
+
 const SoundList = () => {
   const dispatch = useDispatch();
 
@@ -18,16 +20,24 @@ const SoundList = () => {
   const selectSounds = useSelector((state) => state.sounds.sounds);
 
   return (
-    <div className="flex-col justify-center w-1/3 items-center space-y-3">
-      {loading ? (
-        <p>Loading</p>
-      ) : (
-        selectSounds.map((el) => {
-          return (
-            <SoundItem key={el._id} name={el.name} id={el._id} path={el.path} />
-          );
-        })
-      )}
+    <div className="sound-list">
+      <div className="sound-header">Sounds</div>
+      <div className="sounds-wrapper">
+        {loading ? (
+          <p>Loading</p>
+        ) : (
+          selectSounds.map((el) => {
+            return (
+              <SoundItem
+                key={el._id}
+                name={el.name}
+                id={el._id}
+                path={el.path}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };

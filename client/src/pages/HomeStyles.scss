@@ -1,4 +1,17 @@
 .main {
-  background: #ababab;
+  border-left: 2px solid var(--secondary-bg);
   grid-area: main;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .main-header {
+    font-size: 30px;
+    padding-bottom: 10px;
+  }
+
+  .discover-section {
+    display: flex;
+    width: 100%;
+  }
 }
