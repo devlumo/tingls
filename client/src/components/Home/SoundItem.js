@@ -5,6 +5,8 @@ import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
 import { BsSoundwave } from "react-icons/bs";
+import { TiMinus, TiPlus } from "react-icons/ti";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundItemStyles.scss";
@@ -46,19 +48,27 @@ export const SoundItem = ({ id, name, path }) => {
     <motion.div
       animate={{ opacity: [0, 1] }}
       transition={{ duration: 0.2 }}
+      whileHover={{ y: -2 }}
       className="sound-item"
     >
-      <BsSoundwave />
-      {name}
-      {!added ? (
-        <button onClick={addToHub} className="">
-          Add
-        </button>
-      ) : (
-        <button onClick={removeFromHub} className="">
-          Remove
-        </button>
-      )}
+      <div className="card-header">
+        <div className="category">Nature</div>
+        <HiOutlineDotsVertical className="icon" />
+      </div>
+      <div className="card-content">
+        <div className="name">{name}</div>
+      </div>
+      <div className="card-footer">
+        {!added ? (
+          <button onClick={addToHub} className="add">
+            <TiPlus />
+          </button>
+        ) : (
+          <button onClick={removeFromHub} className="remove">
+            <TiMinus />
+          </button>
+        )}
+      </div>
     </motion.div>
   );
 };

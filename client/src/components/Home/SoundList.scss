@@ -1,9 +1,8 @@
 .sound-list {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
   padding: 5px;
-  border-right: 2px solid var(--secondary-bg);
   align-items: center;
 
   .sounds-wrapper {
@@ -13,7 +12,6 @@
     row-gap: 10px;
     width: 100%;
     padding: 10px;
-    padding-left: 0;
     justify-content: center;
     align-content: center;
   }

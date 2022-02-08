@@ -3,6 +3,7 @@ import { getSounds } from "../../redux/sounds";
 import { useDispatch, useSelector } from "react-redux";
 
 import { SoundItem } from "./SoundItem";
+import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundList.scss";
 
