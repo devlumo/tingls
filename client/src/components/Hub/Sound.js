@@ -2,9 +2,16 @@ import React from "react";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { useState } from "react";
 import useSound from "use-sound";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { AiFillHeart } from "react-icons/ai";
+import { TiTimes } from "react-icons/ti";
+
 import { useDispatch, useSelector } from "react-redux";
 import { removeHubSound, updateMute, updateVolume } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
+import { motion } from "framer-motion/dist/framer-motion";
+
+import "./SoundStyles.scss";
 
 const Sound = ({ id, name, path }) => {
   const dispatch = useDispatch();
@@ -61,26 +68,41 @@ const Sound = ({ id, name, path }) => {
   };
 
   return (
-    <div className="bg-white p-2 flex justify-center items-center m-2 text-black">
-      {!muteStatus ? (
-        <FaVolumeUp onClick={handleMute} />
-      ) : (
-        <FaVolumeMute onClick={handleMute} />
-      )}
-      <span className="text-sm p-1">{name}</span>
-      <button className="text-sm p-1" onClick={handleRemove}>
-        X
-      </button>
-      <input
-        onClick={handlePlay}
-        onChange={handleVolume}
-        type="range"
-        min="0"
-        max="1"
-        value={storedVolume}
-        step="any"
-      />
-    </div>
+    <motion.div
+      animate={{ opacity: [0, 1] }}
+      transition={{ duration: 0.2 }}
+      className="sound"
+    >
+      <div className="card-header">
+        Nature
+        <HiOutlineDotsVertical className="icon" />
+      </div>
+
+      <div className="card-content">
+        <div className="sound-name">{name}</div>
+        <div className="controls">
+          {!muteStatus ? (
+            <FaVolumeUp onClick={handleMute} />
+          ) : (
+            <FaVolumeMute onClick={handleMute} />
+          )}
+          <input
+            onClick={handlePlay}
+            className="volume"
+            onChange={handleVolume}
+            type="range"
+            min="0"
+            max="1"
+            value={storedVolume}
+            step="any"
+          />
+        </div>
+      </div>
+      <div className="card-footer">
+        <AiFillHeart />
+        <TiTimes className="remove" onClick={handleRemove} />
+      </div>
+    </motion.div>
   );
 };
 

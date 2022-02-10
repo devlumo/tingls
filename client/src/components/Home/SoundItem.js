@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
-import { BsSoundwave } from "react-icons/bs";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { motion } from "framer-motion/dist/framer-motion";
