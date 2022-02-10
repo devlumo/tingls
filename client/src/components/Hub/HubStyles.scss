@@ -24,14 +24,22 @@
     margin-top: auto;
     bottom: 0;
     width: 100%;
-    height: 200px;
+    height: 100px;
     display: flex;
-    // justify-content: center;
-    // align-items: center;
-    border-top: 1px solid white;
+    justify-content: center;
+    align-items: center;
+    border-top: 5px solid var(--secondary-bg);
   }
 
+  .welcome-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .welcome {
     line-height: 1.6;
+    color: var(--body-color);
   }
 }

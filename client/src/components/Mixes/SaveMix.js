@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import "./SaveMixStyles.scss";
+
 const SaveMix = () => {
   const handleSave = async () => {
     try {
@@ -10,6 +12,8 @@ const SaveMix = () => {
       if (!app_state.hubSounds.length) {
         throw new Error("There are no sounds added!");
       }
+
+      // TODO: MODAL
       const name = "Test1";
 
       const res = await axios.post(
@@ -29,11 +33,8 @@ const SaveMix = () => {
 
   return (
     <>
-      <button
-        onClick={handleSave}
-        className="rounded text-sm bg-blue-500 hover:bg-blue-700 py-2 px-4 m-1 text-white"
-      >
-        Save
+      <button onClick={handleSave} className="save">
+        Save Tingl
       </button>
     </>
   );

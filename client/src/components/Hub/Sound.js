@@ -63,6 +63,15 @@ const Sound = ({ id, name, path }) => {
   const handleVolume = (e) => {
     let inputValue = parseFloat(e.target.value);
 
+    // for progress slider
+    const min = e.target.min;
+    const max = e.target.max;
+    const val = e.target.value;
+
+    e.target.style.backgroundSize =
+      ((val - min) * 100) / (max - min) + "% 100%";
+
+    // updating howl volume and local storage
     dispatch(updateVolume({ id, volume: inputValue }));
     sound.volume(inputValue);
   };

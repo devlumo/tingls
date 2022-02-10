@@ -31,12 +31,14 @@ export const SoundHub = () => {
       <div className="hub-header">HUB</div>
       <div className="sounds-container">
         {sounds.length < 1 ? (
-          <div className="welcome">
-            <h1>Wecome to Tingls!</h1>
-            <p>
-              To get started add some sounds to create your own soundscape, or
-              check what other people are listening to on the mixes tab
-            </p>
+          <div className="welcome-wrapper">
+            <div className="welcome">
+              <h2>Wecome to Tingls!</h2>
+              <p>
+                To get started add some sounds to create your own soundscape, or
+                check what other people are listening to on the mixes tab
+              </p>
+            </div>
           </div>
         ) : (
           sounds.map((sound) => {
