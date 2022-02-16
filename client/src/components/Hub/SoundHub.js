@@ -57,13 +57,13 @@ export const SoundHub = () => {
         )}
       </div>
       <div className="hub-controls">
-        <div className="icon">
-          <HiOutlineDotsVertical />
-        </div>
+        <SaveMix />
         <div className="play-pause" onClick={handleHubPlay}>
           {hubPlay ? <FaPause /> : <FaPlay />}
         </div>
-        <SaveMix />
+        <div className="icon">
+          <HiOutlineDotsVertical />
+        </div>
       </div>
     </div>
   );
