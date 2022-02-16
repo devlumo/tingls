@@ -31,6 +31,16 @@
       padding: 10px;
       padding-left: 0;
       align-items: center;
+
+      .mute {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 

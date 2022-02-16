@@ -90,11 +90,13 @@ const Sound = ({ id, name, path }) => {
       <div className="card-content">
         <div className="sound-name">{name}</div>
         <div className="controls">
-          {!muteStatus ? (
-            <FaVolumeUp onClick={handleMute} />
-          ) : (
-            <FaVolumeMute onClick={handleMute} />
-          )}
+          <div className="mute">
+            {!muteStatus ? (
+              <FaVolumeUp onClick={handleMute} />
+            ) : (
+              <FaVolumeMute onClick={handleMute} />
+            )}
+          </div>
           <input
             onClick={handlePlay}
             className="volume"

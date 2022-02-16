@@ -9,6 +9,9 @@ import {
 import { updateHubPlaying } from "../../redux/hub";
 import SaveMix from "../Mixes/SaveMix";
 
+import { FaPlay, FaPause } from "react-icons/fa";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+
 import "./HubStyles.scss";
 
 export const SoundHub = () => {
@@ -54,9 +57,12 @@ export const SoundHub = () => {
         )}
       </div>
       <div className="hub-controls">
-        <button className="" onClick={handleHubPlay}>
-          {hubPlay ? "Pause" : "Play"}
-        </button>
+        <div className="icon">
+          <HiOutlineDotsVertical />
+        </div>
+        <div className="play-pause" onClick={handleHubPlay}>
+          {hubPlay ? <FaPause /> : <FaPlay />}
+        </div>
         <SaveMix />
       </div>
     </div>

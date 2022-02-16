@@ -7,6 +7,7 @@ import SideNav from "./components/SideNav/SideNav";
 import Login from "./pages/Login";
 import { SoundHub } from "./components/Hub/SoundHub";
 import "./App.scss";
+import Mixes from "./pages/Mixes/Mixes";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <SideNav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/mixes" element={<Mixes />} />
         <Route exact path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
