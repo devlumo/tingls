@@ -22,7 +22,9 @@ const SoundList = () => {
 
   return (
     <div className="sound-list">
-      <div className="sound-header">Sounds</div>
+      <div className="sound-header">
+        <b>Sounds</b>
+      </div>
       <div className="sounds-wrapper">
         {loading ? (
           <p>Loading</p>

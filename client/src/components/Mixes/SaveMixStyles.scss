@@ -14,4 +14,9 @@
   &:focus {
     outline: none;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+  }
 }

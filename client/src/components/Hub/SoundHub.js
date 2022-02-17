@@ -31,7 +31,9 @@ export const SoundHub = () => {
 
   return (
     <div className="hub">
-      <div className="hub-header">HUB</div>
+      <div className="hub-header">
+        <b>HUB</b>
+      </div>
       <div className="sounds-container">
         {sounds.length < 1 ? (
           <div className="welcome-wrapper">
