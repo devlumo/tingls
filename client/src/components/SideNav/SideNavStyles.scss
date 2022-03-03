@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  border-right: 2px solid var(--secondary-bg);
 
   .nav-header {
     margin-top: 20px;
@@ -16,7 +15,7 @@
   }
 
   .nav-item {
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     width: 100%;

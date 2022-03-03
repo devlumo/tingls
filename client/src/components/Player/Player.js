@@ -34,21 +34,23 @@ const Player = () => {
 
   return (
     <div className="player">
-      <div className="left-section">Left</div>
-      <div className="middle-section">
-        <div className="play-pause" onClick={handleHubPlay}>
-          {hubPlay ? <FaPause /> : <FaPlay />}
+      <div className="player-wrap">
+        <div className="left-section">Left</div>
+        <div className="middle-section">
+          <div className="play-pause" onClick={handleHubPlay}>
+            {hubPlay ? <FaPause /> : <FaPlay />}
+          </div>
         </div>
-      </div>
-      <div className="right-section">
-        <motion.div
-          className="clear-hub"
-          onClick={handleClear}
-          whileTap={{ scale: 0.9 }}
-        >
-          <RiDeleteBinLine />
-        </motion.div>
-        <SaveMix />
+        <div className="right-section">
+          <motion.div
+            className="clear-hub"
+            onClick={handleClear}
+            whileTap={{ scale: 0.9 }}
+          >
+            <RiDeleteBinLine />
+          </motion.div>
+          <SaveMix />
+        </div>
       </div>
     </div>
   );

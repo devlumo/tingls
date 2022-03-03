@@ -1,6 +1,5 @@
 .hub {
   grid-area: hub;
-  border-left: 2px solid var(--secondary-bg);
   padding: 10px;
   width: 100%;
   display: flex;
@@ -18,40 +17,6 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto;
     margin-top: 5px;
-  }
-
-  .hub-controls {
-    margin-top: auto;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 5px solid var(--secondary-bg);
-
-    .play-pause {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-
-      &:hover {
-        cursor: pointer;
-        color: var(--tingls-hover);
-      }
-    }
-
-    .icon {
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-
-      &:hover {
-        cursor: pointer;
-        color: var(--tingls-hover);
-      }
-    }
   }
 
   .welcome-wrapper {

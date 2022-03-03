@@ -24,7 +24,7 @@ const SaveMix = () => {
         className="save"
         disabled={Boolean(!sounds.length)}
       >
-        Save Tingl
+        Save
       </motion.button>
       <AnimatePresence initial={false} exitBeforeEnter={true}>
         {
