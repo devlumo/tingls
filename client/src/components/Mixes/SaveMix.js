@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { useSelector } from "react-redux";

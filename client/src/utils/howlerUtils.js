@@ -85,6 +85,7 @@ const getHowlCount = () => {
 
 const removeAllHowls = () => {
   if (window.Howler) {
+    pauseAllHowls();
     window.Howler._howls = [];
   }
 };

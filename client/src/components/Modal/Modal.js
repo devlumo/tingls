@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
+import { motion } from "framer-motion/dist/framer-motion";
 import { RiCloseLine } from "react-icons/ri";
 import "./ModalStyles.scss";
 
@@ -13,7 +13,6 @@ function Modal({ isOpen, onClose }) {
       e.preventDefault();
       const app_state = JSON.parse(localStorage.getItem("app_state"));
       const data = JSON.stringify(app_state.hubSounds);
-      console.log("?");
 
       if (!app_state.hubSounds.length) {
         throw new Error("There are no sounds added!");

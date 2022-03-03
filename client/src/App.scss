@@ -32,8 +32,9 @@ body {
   display: grid;
   grid-template-areas:
     "header header header"
-    "nav main hub";
-  grid-template-rows: 60px 1fr;
+    "nav main hub"
+    "rfooter footer lfooter";
+  grid-template-rows: 60px 1fr 10%;
   grid-template-columns: 12% 1fr 25%;
   height: 100vh;
 }

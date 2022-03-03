@@ -14,6 +14,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 import "./SoundStyles.scss";
 
 const Sound = ({ id, name, path }) => {
+  console.log("render sound");
   const dispatch = useDispatch();
 
   const muteStatus = useSelector(
@@ -28,6 +29,7 @@ const Sound = ({ id, name, path }) => {
   const [playing, setPlaying] = useState(false);
 
   // useSound hook creates a new Howl Object and attaches it to the Howler Object
+  // eslint-disable-next-line
   const [play, { sound }] = useSound(path, {
     volume: storedVolume,
     mute: muteStatus,

@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import { SoundHub } from "./components/Hub/SoundHub";
 import "./App.scss";
 import Mixes from "./pages/Mixes/Mixes";
+import Player from "./components/Player/Player";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <SoundHub></SoundHub>
+      <Player></Player>
     </div>
   );
 };

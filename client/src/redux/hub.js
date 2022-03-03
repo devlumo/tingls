@@ -152,6 +152,20 @@ const hubSlice = createSlice({
 
       localStorage.setItem("app_state", JSON.stringify(storedState));
     },
+
+    clearHub(state, action) {
+      removeAllHowls();
+      localStorage.setItem(
+        "app_state",
+        JSON.stringify({
+          hubSounds: [],
+          hubPlay: false,
+        })
+      );
+      state.currentSounds = [];
+      state.hubPlay = false;
+      state.count = 0;
+    },
   },
 });
 
@@ -162,5 +176,6 @@ export const {
   updateVolume,
   updateHubPlaying,
   loadMix,
+  clearHub,
 } = hubSlice.actions;
 export default hubSlice.reducer;
