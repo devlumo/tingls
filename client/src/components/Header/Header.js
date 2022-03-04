@@ -5,10 +5,12 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setEmail, setUsername } from "../../redux/auth";
 import { useEffect } from "react";
+import Login from "./Login/Login";
 
 import { motion } from "framer-motion/dist/framer-motion";
 
 import "./HeaderStyles.scss";
+import SignUp from "./SignUp/SignUp";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,20 +37,16 @@ const Header = () => {
   return (
     <div className="header">
       <div className="logo">
-        <Link to="/">tingls.io</Link>
+        <Link to="/">✨ tingls.io</Link>
       </div>
       <div className="header-menu">
         <ul className="menu">
-          <motion.li
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 },
-            }}
-            className="menu-item"
-          >
-            {userName ? userName.toLowerCase() : <Link to="/login">login</Link>}
-          </motion.li>
-          <li className="menu-item">about</li>
+          <li className="menu-item">
+            {userName ? userName.toUpperCase() : <Login />}
+          </li>
+          <li className="menu-item">
+            {userName ? userName.toUpperCase() : <SignUp />}
+          </li>
         </ul>
       </div>
     </div>
