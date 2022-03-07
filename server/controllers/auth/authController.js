@@ -28,7 +28,6 @@ const login = async (req, res, next) => {
       success: true,
       userData: req.session.userData,
       ip: req.socket.remoteAddress,
-      proxyIp: `helo${req.headers["x-forwarded-for"]}`,
       message: "Logged in successfully",
     });
   } catch (error) {
@@ -39,13 +38,12 @@ const login = async (req, res, next) => {
 const signup = async (req, res, next) => {
   try {
     // 1. Try and insert new user
+
     const newUser = await User.create({
       userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      dob: req.body.dob,
+      fullName: req.body.fullName,
     });
 
     // 2. Create session to log the user in
@@ -61,7 +59,8 @@ const signup = async (req, res, next) => {
       message: "Your account has been created",
     });
   } catch (error) {
-    return next(new ApiError("Something went wrong"));
+    console.log(error);
+    return next(new ApiError("Something went wrong", 400));
   }
 };
 

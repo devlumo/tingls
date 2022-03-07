@@ -28,21 +28,11 @@ const userSchema = mongoose.Schema(
       required: [true, "username is required"],
       select: false, // won't show up in any output
     },
-    firstName: {
+    fullName: {
       type: String,
-      required: [true, "first name is required"],
-      maxLength: [16, "first name length cannot be greater than 16 characters"],
-      minLength: [2, "first name cannot be less than 2 characters"],
-    },
-    lastName: {
-      type: String,
-      required: [true, "surname is required"],
-      maxLength: [16, "surname length cannot be greater than 16 characters"],
-      minLength: [2, "surname cannot be less than 2 characters"],
-    },
-    dob: {
-      type: Date,
-      required: [true, "Date of birth is required"],
+      required: [true, "Full name is required"],
+      maxLength: [16, "Full name length cannot be greater than 16 characters"],
+      minLength: [2, "Full name cannot be less than 2 characters"],
     },
     premium: false,
   },
