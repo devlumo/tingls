@@ -19,6 +19,10 @@ const soundSchema = mongoose.Schema({
   imageUrl: {
     type: String,
   },
+  likedBy: {
+    type: Array,
+    default: [],
+  },
 });
 
 const Sound = mongoose.model("sounds", soundSchema);

@@ -22,12 +22,12 @@ const login = async (req, res, next) => {
     req.session.userData = {
       username: user.userName,
       email: user.email,
+      user_id: user._id,
     };
 
     res.status(200).json({
       success: true,
       userData: req.session.userData,
-      ip: req.socket.remoteAddress,
       message: "Logged in successfully",
     });
   } catch (error) {

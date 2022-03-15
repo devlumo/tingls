@@ -36,6 +36,7 @@ const SoundList = () => {
                 id={el._id}
                 path={el.path}
                 imageUrl={el.imageUrl}
+                likeCount={el.likeCount}
               />
             );
           })

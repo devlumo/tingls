@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
-import { TiMinus, TiPlus } from "react-icons/ti";
+// import { TiMinus, TiPlus } from "react-icons/ti";
 // import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundItemStyles.scss";
 
-export const SoundItem = ({ id, name, path, imageUrl }) => {
+export const SoundItem = ({ id, name, path, imageUrl, likeCount }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
   const added = Boolean(
     useSelector((state) =>
@@ -55,12 +55,6 @@ export const SoundItem = ({ id, name, path, imageUrl }) => {
         <img src={imageUrl} alt={name} />
       </div>
       <div className="card-footer">
-        <div className="sub">
-          <div className="like-button">
-            <FcLikePlaceholder />
-          </div>
-          <div className="like-count">8</div>
-        </div>
         <div className="info">
           <div className="name">{name}</div>
           {!added ? (
@@ -72,6 +66,12 @@ export const SoundItem = ({ id, name, path, imageUrl }) => {
               REMOVE
             </button>
           )}
+        </div>
+        <div className="sub">
+          <div className="like-button">
+            <FcLikePlaceholder />
+          </div>
+          <div className="like-count">{likeCount}</div>
         </div>
       </div>
     </motion.div>

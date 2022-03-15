@@ -45,10 +45,12 @@ const likeSound = async (req, res, next) => {
       return next(new ApiError("You are not logged in", 401));
     }
 
+    const user_id = req.session.userData.user_id;
     const sound = await Sound.findById(id);
 
     const updatedSound = await Sound.findByIdAndUpdate(id, {
       likeCount: sound.likeCount + 1,
+      $push: { likedBy: user_id },
     });
 
     res.status(200).json({
