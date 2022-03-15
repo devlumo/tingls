@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { useState } from "react";
+import SignUpModal from "./SignUpModal/SignUpModal";
 import "./SignUpStyles.scss";
 
 const SignUp = () => {
@@ -18,13 +19,15 @@ const SignUp = () => {
         onClick={handleModalOpen}
         className="sign-up"
       >
-        Sign Up
+        Sign up
       </motion.button>
       <AnimatePresence initial={false} exitBeforeEnter={true}>
         {
           // anything inside AnimatePresence will not remove from the DOM until
           // animations are complete
-          // isOpen && <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+          isOpen && (
+            <SignUpModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+          )
         }
       </AnimatePresence>
     </>
