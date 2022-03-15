@@ -14,7 +14,6 @@ import { motion } from "framer-motion/dist/framer-motion";
 import "./SoundStyles.scss";
 
 const Sound = ({ id, name, path }) => {
-  console.log("render sound");
   const dispatch = useDispatch();
 
   const muteStatus = useSelector(

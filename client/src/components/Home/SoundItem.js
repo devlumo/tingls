@@ -10,7 +10,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundItemStyles.scss";
 
-export const SoundItem = ({ id, name, path }) => {
+export const SoundItem = ({ id, name, path, imageUrl }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
   const added = Boolean(
     useSelector((state) =>
@@ -50,14 +50,11 @@ export const SoundItem = ({ id, name, path }) => {
       whileHover={{ y: -2 }}
       className="sound-item"
     >
-      <div className="card-header">
-        <div className="category">Nature</div>
-        <HiOutlineDotsVertical className="icon" />
-      </div>
       <div className="card-content">
-        <div className="name">{name}</div>
+        <img src={imageUrl} alt={name} />
       </div>
       <div className="card-footer">
+        <div className="name">{name}</div>
         {!added ? (
           <button onClick={addToHub} className="add">
             <TiPlus />

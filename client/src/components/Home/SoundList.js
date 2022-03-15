@@ -35,6 +35,7 @@ const SoundList = () => {
                 name={el.name}
                 id={el._id}
                 path={el.path}
+                imageUrl={el.imageUrl}
               />
             );
           })
