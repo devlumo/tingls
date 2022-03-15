@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="logo">
-        <Link to="/">✨ tingls.io</Link>
+        <Link to="/">✨ TINGLS.IO</Link>
       </div>
       <div className="header-menu">
         <ul className="menu">

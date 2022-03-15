@@ -5,7 +5,8 @@ import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
 import { TiMinus, TiPlus } from "react-icons/ti";
-import { HiOutlineDotsVertical } from "react-icons/hi";
+// import { HiOutlineDotsVertical } from "react-icons/hi";
+import { FcLikePlaceholder } from "react-icons/fc";
 import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundItemStyles.scss";
@@ -54,16 +55,24 @@ export const SoundItem = ({ id, name, path, imageUrl }) => {
         <img src={imageUrl} alt={name} />
       </div>
       <div className="card-footer">
-        <div className="name">{name}</div>
-        {!added ? (
-          <button onClick={addToHub} className="add">
-            <TiPlus />
-          </button>
-        ) : (
-          <button onClick={removeFromHub} className="remove">
-            <TiMinus />
-          </button>
-        )}
+        <div className="sub">
+          <div className="like-button">
+            <FcLikePlaceholder />
+          </div>
+          <div className="like-count">8</div>
+        </div>
+        <div className="info">
+          <div className="name">{name}</div>
+          {!added ? (
+            <button onClick={addToHub} className="add">
+              ADD
+            </button>
+          ) : (
+            <button onClick={removeFromHub} className="remove">
+              REMOVE
+            </button>
+          )}
+        </div>
       </div>
     </motion.div>
   );
