@@ -1,5 +1,6 @@
 import Sound from "../../models/soundsModel.js";
 import ApiError from "../../utils/ApiError.js";
+import mongoose from "mongoose";
 
 const getAllSounds = async (req, res, next) => {
   try {
@@ -28,4 +29,37 @@ const createSound = async (req, res, next) => {
   }
 };
 
-export { getAllSounds, createSound };
+const likeSound = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(404).json({
+        success: false,
+        message: "No sound with that ID",
+      });
+    }
+
+    if (!req.session || !req.session.userData) {
+      return next(new ApiError("You are not logged in", 401));
+    }
+
+    const sound = await Sound.findById(id);
+
+    const updatedSound = await Sound.findByIdAndUpdate(id, {
+      likeCount: sound.likeCount + 1,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Sound updated",
+      updatedSound,
+    });
+  } catch (error) {
+    console.log(error);
+    next(new ApiError("Something went wrong", 400));
+  }
+};
+
+export { getAllSounds, createSound, likeSound };
