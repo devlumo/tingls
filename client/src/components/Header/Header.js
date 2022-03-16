@@ -39,9 +39,7 @@ const Header = () => {
       </div>
       <div className="header-menu">
         <ul className="menu">
-          <li className="menu-item">
-            {userName ? userName.toUpperCase() : <Login />}
-          </li>
+          <li className="menu-item">{userName ? null : <Login />}</li>
           <li className="menu-item">
             {userName ? userName.toUpperCase() : <SignUp />}
           </li>

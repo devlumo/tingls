@@ -32,15 +32,16 @@ const SaveMix = () => {
         {
           // anything inside AnimatePresence will not remove from the DOM until
           // animations are complete
-          isOpen && userName ? (
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-          ) : (
-            <LoginModal
-              isOpen={isOpen}
-              signUp={true}
-              onClose={() => setIsOpen(false)}
-            />
-          )
+          isOpen &&
+            (userName ? (
+              <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            ) : (
+              <LoginModal
+                isOpen={isOpen}
+                signUp={true}
+                onClose={() => setIsOpen(false)}
+              />
+            ))
         }
       </AnimatePresence>
     </>
