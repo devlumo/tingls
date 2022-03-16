@@ -14,6 +14,6 @@ soundsRouter.get("/", getAllSounds);
 soundsRouter.get("/getAllMixes", getAllMixes);
 soundsRouter.post("/createSound", createSound);
 soundsRouter.post("/createMix", createMix);
-soundsRouter.patch("/:id/likeSound", likeSound);
+soundsRouter.route("/:id/likeSound").patch(protect, likeSound);
 
 export default soundsRouter;

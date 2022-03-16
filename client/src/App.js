@@ -14,7 +14,6 @@ import { ToastContainer } from "react-toastify";
 const App = () => {
   return (
     <div className="app-container">
-      <ToastContainer />
       <Header />
       <SideNav />
       <Routes>
@@ -25,6 +24,7 @@ const App = () => {
       </Routes>
       <SoundHub></SoundHub>
       <Player></Player>
+      <ToastContainer />
     </div>
   );
 };

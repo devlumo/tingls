@@ -85,6 +85,10 @@
         justify-content: center;
         padding-right: 5px;
         font-size: 1rem;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .like-count {
