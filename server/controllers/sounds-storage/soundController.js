@@ -32,7 +32,8 @@ const createSound = async (req, res, next) => {
 const likeSound = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
+    const { val } = req.body;
+    let updatedSound = null;
 
     if (!mongoose.isValidObjectId(id)) {
       return res.status(404).json({
@@ -41,17 +42,20 @@ const likeSound = async (req, res, next) => {
       });
     }
 
-    if (!req.session || !req.session.userData) {
-      return next(new ApiError("You are not logged in", 401));
-    }
-
     const user_id = req.session.userData.user_id;
     const sound = await Sound.findById(id);
 
-    const updatedSound = await Sound.findByIdAndUpdate(id, {
-      likeCount: sound.likeCount + 1,
-      $push: { likedBy: user_id },
-    });
+    if (val === 1) {
+      updatedSound = await Sound.findByIdAndUpdate(id, {
+        likeCount: sound.likeCount + val,
+        $push: { likedBy: user_id },
+      });
+    } else {
+      updatedSound = await Sound.findByIdAndUpdate(id, {
+        likeCount: sound.likeCount + val,
+        $pullAll: { likedBy: [user_id] },
+      });
+    }
 
     res.status(200).json({
       success: true,

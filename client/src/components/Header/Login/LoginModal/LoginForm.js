@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setEmail, setUsername } from "../../../../redux/auth";
+import { setEmail, setID, setUsername } from "../../../../redux/auth";
 import axios from "axios";
 
 const LoginForm = ({ onClose, switchForm }) => {
@@ -26,6 +26,7 @@ const LoginForm = ({ onClose, switchForm }) => {
 
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));
+      dispatch(setID(userData.user_id));
       onClose();
     } catch (error) {
       setError("Email or Password is incorrect!");

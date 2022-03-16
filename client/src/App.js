@@ -9,10 +9,12 @@ import { SoundHub } from "./components/Hub/SoundHub";
 import "./App.scss";
 import Mixes from "./pages/Mixes/Mixes";
 import Player from "./components/Player/Player";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <div className="app-container">
+      <ToastContainer />
       <Header />
       <SideNav />
       <Routes>

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { protect } from "../controllers/auth/protectController.js";
 import {
   createSound,
   getAllSounds,

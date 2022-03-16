@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { setEmail, setUsername } from "../../../../redux/auth";
+import { setEmail, setUsername, setID } from "../../../../redux/auth";
 import axios from "axios";
 
 const SignUpForm = ({ switchForm }) => {
@@ -29,6 +29,7 @@ const SignUpForm = ({ switchForm }) => {
       const userData = res.data.userData;
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));
+      dispatch(setID(userData.user_id));
       navigate("/");
     } catch (error) {
       console.log(error);

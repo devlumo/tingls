@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setEmail, setUsername } from "../../redux/auth";
+import { setEmail, setUsername, setID } from "../../redux/auth";
 import { useEffect } from "react";
 import Login from "./Login/Login";
 
@@ -24,6 +24,7 @@ const Header = () => {
 
         dispatch(setUsername(userData.username));
         dispatch(setEmail(userData.email));
+        dispatch(setID(userData.user_id));
       } catch (error) {
         return;
         //console.log(error);

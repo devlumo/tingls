@@ -1,18 +1,24 @@
 import React from "react";
-// import { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
-
-// import { TiMinus, TiPlus } from "react-icons/ti";
-// import { HiOutlineDotsVertical } from "react-icons/hi";
-import { FcLikePlaceholder } from "react-icons/fc";
+import { like } from "../../api/api";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundItemStyles.scss";
 
-export const SoundItem = ({ id, name, path, imageUrl, likeCount }) => {
+export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
+  const { userID } = useSelector((state) => state.user);
+  const liked = Boolean(likedBy.find((id) => userID === id));
+
+  const [likedByUser, setLikedByUser] = useState(liked);
+  const [likeCounter, setLikeCounter] = useState(likeCount);
+
   const added = Boolean(
     useSelector((state) =>
       state.soundHub.currentSounds.find((sound) => sound.id === id)
@@ -44,6 +50,21 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount }) => {
     dispatch(removeHubSound({ id, path }));
   };
 
+  const handleLike = async () => {
+    let val = 1;
+
+    if (!userID) {
+      toast.warn("Login to like!");
+      return;
+    }
+    if (likedByUser) {
+      val = -1;
+    }
+    await like(id, val);
+    setLikedByUser(!likedByUser);
+    setLikeCounter(likeCounter + val);
+  };
+
   return (
     <motion.div
       animate={{ opacity: [0, 1] }}
@@ -68,10 +89,10 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount }) => {
           )}
         </div>
         <div className="sub">
-          <div className="like-button">
-            <FcLikePlaceholder />
+          <div className="like-button" onClick={handleLike}>
+            {likedByUser ? <FcLike /> : <FcLikePlaceholder />}
           </div>
-          <div className="like-count">{likeCount}</div>
+          <div className="like-count">{likeCounter}</div>
         </div>
       </div>
     </motion.div>
