@@ -7,8 +7,6 @@ import { setEmail, setUsername } from "../../redux/auth";
 import { useEffect } from "react";
 import Login from "./Login/Login";
 
-import { motion } from "framer-motion/dist/framer-motion";
-
 import "./HeaderStyles.scss";
 import SignUp from "./SignUp/SignUp";
 

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Modal from "../Modal/Modal";
 
 import "./SaveMixStyles.scss";
+import LoginModal from "../Header/Login/LoginModal/LoginModal";
 
 const SaveMix = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ const SaveMix = () => {
     setIsOpen(true);
   };
 
+  const { userName } = useSelector((state) => state.user);
   return (
     <>
       <motion.button
@@ -30,7 +32,15 @@ const SaveMix = () => {
         {
           // anything inside AnimatePresence will not remove from the DOM until
           // animations are complete
-          isOpen && <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+          isOpen && userName ? (
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+          ) : (
+            <LoginModal
+              isOpen={isOpen}
+              signUp={true}
+              onClose={() => setIsOpen(false)}
+            />
+          )
         }
       </AnimatePresence>
     </>

@@ -26,7 +26,11 @@ const Login = () => {
           // anything inside AnimatePresence will not remove from the DOM until
           // animations are complete
           isOpen && (
-            <LoginModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <LoginModal
+              isOpen={isOpen}
+              signUp={false}
+              onClose={() => setIsOpen(false)}
+            />
           )
         }
       </AnimatePresence>
