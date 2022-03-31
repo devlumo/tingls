@@ -9,6 +9,10 @@
   background-color: var(--secondary-bg);
   border-radius: 0.375rem;
 
+  animation-name: FadeIn;
+  animation-duration: 0.5s;
+  transition-timing-function: linear;
+
   .sound-name {
     margin-bottom: 10px;
   }
@@ -63,5 +67,50 @@
         scale: 1.1;
       }
     }
+  }
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

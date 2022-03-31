@@ -4,6 +4,7 @@ const initialState = {
   userName: null,
   email: null,
   userID: null,
+  likedSounds: [],
 };
 
 const userSlice = createSlice({
@@ -19,8 +20,12 @@ const userSlice = createSlice({
     setID(state, action) {
       state.userID = action.payload;
     },
+    setLikedSounds(state, action) {
+      state.likedSounds = action.payload;
+    },
   },
 });
 
-export const { setUsername, setEmail, setID } = userSlice.actions;
+export const { setUsername, setEmail, setID, setLikedSounds } =
+  userSlice.actions;
 export default userSlice.reducer;

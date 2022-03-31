@@ -14,6 +14,7 @@ const login = async (req, res, next) => {
     }
 
     const user = await User.findOne({ email }).select("+password");
+    console.log(user);
 
     if (!user || !(await user.checkPassword(password, user.password))) {
       return next(new ApiError("Email or Password is incorrect", 401));
@@ -24,6 +25,8 @@ const login = async (req, res, next) => {
       email: user.email,
       user_id: user._id,
     };
+
+    console.log("Session", req.session);
 
     res.status(200).json({
       success: true,
@@ -50,6 +53,7 @@ const signup = async (req, res, next) => {
     req.session.userData = {
       username: newUser.userName,
       email: newUser.email,
+      user_id: newUser._id,
     };
 
     // 3. Send response

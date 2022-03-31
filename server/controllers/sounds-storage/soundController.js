@@ -43,6 +43,7 @@ const likeSound = async (req, res, next) => {
     }
 
     const user_id = req.session.userData.user_id;
+
     const sound = await Sound.findById(id);
 
     if (val === 1) {
@@ -53,7 +54,7 @@ const likeSound = async (req, res, next) => {
     } else {
       updatedSound = await Sound.findByIdAndUpdate(id, {
         likeCount: sound.likeCount + val,
-        $pullAll: { likedBy: [user_id] },
+        $pull: { likedBy: user_id },
       });
     }
 

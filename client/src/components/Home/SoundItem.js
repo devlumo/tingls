@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHubSound, removeHubSound } from "../../redux/hub";
+import { getSounds } from "../../redux/sounds";
 import { playAllHowls } from "../../utils/howlerUtils";
 import { like } from "../../api/api";
 import { toast } from "react-toastify";
@@ -14,10 +15,13 @@ import "./SoundItemStyles.scss";
 export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
   // to check if the sound is added to the hub, check if it is stored and evaluate it to a boolean
   const { userID } = useSelector((state) => state.user);
-  const liked = Boolean(likedBy.find((id) => userID === id));
+  let liked = Boolean(likedBy.find((id) => userID === id));
+
+  if (likedBy.length > 1) {
+    liked = Boolean(likedBy.find((id) => userID === id));
+  }
 
   const [likedByUser, setLikedByUser] = useState(liked);
-  const [likeCounter, setLikeCounter] = useState(likeCount);
 
   const added = Boolean(
     useSelector((state) =>
@@ -61,10 +65,11 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
       val = -1;
     }
     await like(id, val);
-    setLikedByUser(!likedByUser);
-    setLikeCounter(likeCounter + val);
+    setLikedByUser(!liked);
+    dispatch(getSounds());
   };
 
+  console.log(name, likedBy, likedByUser);
   return (
     <motion.div
       animate={{ opacity: [0, 1] }}
@@ -92,7 +97,7 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
           <div className="like-button" onClick={handleLike}>
             {likedByUser ? <FcLike /> : <FcLikePlaceholder />}
           </div>
-          <div className="like-count">{likeCounter}</div>
+          <div className="like-count">{likeCount}</div>
         </div>
       </div>
     </motion.div>

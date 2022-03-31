@@ -1,8 +1,14 @@
 import axios from "axios";
 
-export const like = (soundId, val) =>
+const API_URL = "http://127.0.0.1:8080/api/";
+
+export const like = async (soundId, val) =>
   axios.patch(
-    `http://127.0.0.1:8080/api/sounds/${soundId}/likeSound/`,
+    `${API_URL}sounds/${soundId}/likeSound/`,
     { val: val },
     { withCredentials: true }
   );
+
+export const getUserData = async () => {
+  return axios.get(`${API_URL}auth/getSession`, { withCredentials: true });
+};

@@ -80,7 +80,7 @@ const SignUpForm = ({ switchForm }) => {
       </div>
       <div className="modal-footer">
         <div className="sign-up-link" onClick={switchForm}>
-          Already have an account? Sign In!
+          Already have an account? <b>Sign In!</b>
         </div>
       </div>
     </>

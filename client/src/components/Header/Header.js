@@ -1,30 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setEmail, setUsername, setID } from "../../redux/auth";
+import { setEmail, setUsername, setID, setLikedSounds } from "../../redux/auth";
+import { getUserData } from "../../api/api";
 import { useEffect } from "react";
 import Login from "./Login/Login";
+import SignUp from "./SignUp/SignUp";
 
 import "./HeaderStyles.scss";
-import SignUp from "./SignUp/SignUp";
 
 const Header = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axios.get(
-          "http://127.0.0.1:8080/api/auth/getSession",
-          { withCredentials: true }
-        );
-        // TODO: IF STATEMENT
+        const res = await getUserData();
         const userData = res.data.userData;
-
+        console.log(userData);
         dispatch(setUsername(userData.username));
         dispatch(setEmail(userData.email));
         dispatch(setID(userData.user_id));
+        dispatch(setLikedSounds(userData.likedSounds));
       } catch (error) {
         return;
         //console.log(error);

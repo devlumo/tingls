@@ -78,7 +78,7 @@ const Sound = ({ id, name, path }) => {
   };
 
   return (
-    <motion.div
+    <div
       animate={{ opacity: [0, 1] }}
       transition={{ duration: 0.2 }}
       className="sound"
@@ -114,7 +114,7 @@ const Sound = ({ id, name, path }) => {
         <AiFillHeart />
         <TiTimes className="remove" onClick={handleRemove} />
       </div>
-    </motion.div>
+    </div>
   );
 };
 

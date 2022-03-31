@@ -63,7 +63,7 @@ const LoginForm = ({ onClose, switchForm }) => {
       </div>
       <div className="modal-footer">
         <div className="sign-up-link" onClick={switchForm}>
-          Don't have an account? Sign Up!
+          Don't have an account? <b>Sign Up!</b>
         </div>
       </div>
     </>
