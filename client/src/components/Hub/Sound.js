@@ -9,9 +9,9 @@ import { TiTimes } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { removeHubSound, updateMute, updateVolume } from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
-import { motion } from "framer-motion/dist/framer-motion";
 
 import "./SoundStyles.scss";
+import Volume from "./Volume/Volume";
 
 const Sound = ({ id, name, path }) => {
   const dispatch = useDispatch();
@@ -98,15 +98,10 @@ const Sound = ({ id, name, path }) => {
               <FaVolumeMute onClick={handleMute} />
             )}
           </div>
-          <input
-            onClick={handlePlay}
-            className="volume"
-            onChange={handleVolume}
-            type="range"
-            min="0"
-            max="1"
-            value={storedVolume}
-            step="any"
+          <Volume
+            handlePlay={handlePlay}
+            handleVolume={handleVolume}
+            storedVolume={storedVolume}
           />
         </div>
       </div>
