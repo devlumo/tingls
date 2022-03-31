@@ -9,6 +9,10 @@
   box-shadow: rgba(8, 8, 8, 0.3) 0px 1px 2px 0px,
     rgba(13, 13, 14, 0.15) 0px 1px 3px 1px;
 
+  animation-name: FadeIn;
+  animation-duration: 0.5s;
+  transition-timing-function: linear;
+
   .card-header {
     display: flex;
     width: 100%;
@@ -125,6 +129,63 @@
 
     &:hover {
       background-color: #eb4040;
+    }
+  }
+
+  .like {
+    color: var(--border-color);
+
+    &:hover {
+      color: #ed4956;
+    }
+  }
+
+  .liked {
+    color: #ed4956;
+  }
+
+  @keyframes FadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes FadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes FadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes FadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes FadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }

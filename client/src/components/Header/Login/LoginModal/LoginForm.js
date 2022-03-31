@@ -24,6 +24,7 @@ const LoginForm = ({ onClose, switchForm }) => {
 
       const userData = res.data.userData;
 
+      // TODO: Fix to just one line of code
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));
       dispatch(setID(userData.user_id));

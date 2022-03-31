@@ -18,6 +18,7 @@ const MixList = () => {
   }, [dispatch]);
 
   const selectMixes = useSelector((state) => state.mixes.mixes);
+
   return (
     <div className="mix-wrapper">
       {loading ? (

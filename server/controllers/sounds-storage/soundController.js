@@ -64,7 +64,6 @@ const likeSound = async (req, res, next) => {
       updatedSound,
     });
   } catch (error) {
-    console.log(error);
     next(new ApiError("Something went wrong", 400));
   }
 };
