@@ -38,6 +38,7 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
       path,
       name,
       volume: 0,
+      imageUrl,
     };
 
     dispatch(addHubSound(soundObject));
