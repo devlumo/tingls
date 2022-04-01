@@ -2,9 +2,8 @@ import React from "react";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { useState } from "react";
 import useSound from "use-sound";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { AiFillHeart } from "react-icons/ai";
-import { TiTimes } from "react-icons/ti";
+import { MdClose } from "react-icons/md";
+import { BsThreeDots } from "react-icons/bs";
 
 import { useDispatch, useSelector } from "react-redux";
 import { removeHubSound, updateMute, updateVolume } from "../../redux/hub";
@@ -13,7 +12,7 @@ import { playAllHowls } from "../../utils/howlerUtils";
 import "./SoundStyles.scss";
 import Volume from "./Volume/Volume";
 
-const Sound = ({ id, name, path }) => {
+const Sound = ({ id, name, path, imageUrl }) => {
   const dispatch = useDispatch();
 
   const muteStatus = useSelector(
@@ -64,14 +63,6 @@ const Sound = ({ id, name, path }) => {
   const handleVolume = (e) => {
     let inputValue = parseFloat(e.target.value);
 
-    // for progress slider
-    const min = e.target.min;
-    const max = e.target.max;
-    const val = e.target.value;
-
-    e.target.style.backgroundSize =
-      ((val - min) * 100) / (max - min) + "% 100%";
-
     // updating howl volume and local storage
     dispatch(updateVolume({ id, volume: inputValue }));
     sound.volume(inputValue);
@@ -79,17 +70,23 @@ const Sound = ({ id, name, path }) => {
 
   return (
     <div
-      animate={{ opacity: [0, 1] }}
-      transition={{ duration: 0.2 }}
+      onHover
       className="sound"
+      style={{
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: "cover",
+        // backgroundColor: "rgba(0, 0, 0, 0.7)" /* Tint color */,
+        // backgroundBlendMode: "multiply",
+      }}
     >
       <div className="card-header">
-        Nature
-        <HiOutlineDotsVertical className="icon" />
+        <BsThreeDots />
+        <div className="sound-name">{name}</div>
+        <MdClose className="remove" onClick={handleRemove} />
       </div>
 
-      <div className="card-content">
-        <div className="sound-name">{name}</div>
+      <div className="card-content"></div>
+      <div className="card-footer">
         <div className="controls">
           <div className="mute">
             {!muteStatus ? (
@@ -104,10 +101,6 @@ const Sound = ({ id, name, path }) => {
             storedVolume={storedVolume}
           />
         </div>
-      </div>
-      <div className="card-footer">
-        <AiFillHeart />
-        <TiTimes className="remove" onClick={handleRemove} />
       </div>
     </div>
   );
