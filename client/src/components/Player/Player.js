@@ -14,6 +14,8 @@ import SaveMix from "../Mixes/SaveMix";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 
+import SoundWave from "../SoundWave/SoundWave";
+
 const Player = () => {
   const hubPlay = useSelector((state) => state.soundHub.hubPlay);
   const dispatch = useDispatch();
@@ -35,7 +37,9 @@ const Player = () => {
   return (
     <div className="player">
       <div className="player-wrap">
-        <div className="left-section">Left</div>
+        <div className="left-section">
+          <SoundWave />
+        </div>
         <div className="middle-section">
           <div className="play-pause" onClick={handleHubPlay}>
             {hubPlay ? <FaPause /> : <FaPlay />}

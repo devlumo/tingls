@@ -8,7 +8,6 @@ import "./HubStyles.scss";
 export const SoundHub = () => {
   const sounds = useSelector((state) => state.soundHub.currentSounds);
 
-  console.log(sounds);
   return (
     <div className="hub">
       <div className="hub-header">
