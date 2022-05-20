@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { loadMix } from "../../redux/hub";
 import moment from "moment";
 import "./MixItemStyles.scss";
+import Avatar from "../Avatars/Avatar";
 
 const MixItem = ({ id, name, data, creator, createdOn }) => {
   const dispatch = useDispatch();
@@ -22,7 +23,11 @@ const MixItem = ({ id, name, data, creator, createdOn }) => {
       <div className="name">
         <h3>{name}</h3>
       </div>
-      <div className="sounds"></div>
+      <div className="sounds">
+        {mixData.map((mix) => (
+          <Avatar imagePath={mix.imageUrl} bgColor="#4e00c2" />
+        ))}
+      </div>
       <div className="footer-wrap">
         <div className="creator">By {creator}</div>
         <div className="footer">

@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
 
+  .sounds {
+    display: flex;
+  }
+
   .creator {
     margin-top: 5px;
     color: var(--body-color);
