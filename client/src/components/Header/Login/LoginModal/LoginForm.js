@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setEmail, setID, setUsername } from "../../../../redux/auth";
-import axios from "axios";
+import { login } from "../../../../api/api";
 
 const LoginForm = ({ onClose, switchForm }) => {
   const [error, setError] = useState(null);
@@ -13,21 +13,13 @@ const LoginForm = ({ onClose, switchForm }) => {
       e.preventDefault();
       const { email, password } = e.target.elements;
 
-      const res = await axios.post(
-        "http://127.0.0.1:8080/api/auth/login/",
-        {
-          email: email.value,
-          password: password.value,
-        },
-        { withCredentials: true }
-      );
+      const result = await login(email, password);
+      const { userData } = result.data;
 
-      const userData = res.data.userData;
-
-      // TODO: Fix to just one line of code
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));
       dispatch(setID(userData.user_id));
+
       onClose();
     } catch (error) {
       setError("Email or Password is incorrect!");

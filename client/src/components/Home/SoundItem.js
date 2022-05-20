@@ -10,8 +10,7 @@ import { like } from "../../api/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { FaHeart } from "react-icons/fa";
-import { motion } from "framer-motion/dist/framer-motion";
+import { FaHeart, FaArrowRight, FaStar, FaArrowLeft } from "react-icons/fa";
 
 import "./SoundItemStyles.scss";
 
@@ -25,6 +24,16 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
 
   const hubPlaying = useSelector((state) => state.soundHub.hubPlay);
 
+  const [show, handleShow] = useState("hide");
+
+  const handleMouseOver = () => {
+    handleShow(null);
+  };
+
+  const handleMouseOut = () => {
+    handleShow("hide");
+  };
+
   const added = Boolean(
     useSelector((state) =>
       state.soundHub.currentSounds.find((sound) => sound.id === id)
@@ -33,25 +42,24 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
 
   // add the sound object to the Hub
   const addToHub = () => {
-    const soundObject = {
-      id,
-      path,
-      name,
-      volume: 0,
-      imageUrl,
-    };
+    if (!added) {
+      const soundObject = {
+        id,
+        path,
+        name,
+        volume: 0,
+        imageUrl,
+      };
 
-    dispatch(addHubSound(soundObject));
+      dispatch(addHubSound(soundObject));
 
-    // only auto play the added sound if the hub is playing others
-    if (hubPlaying) {
-      playAllHowls();
+      // only auto play the added sound if the hub is playing others
+      if (hubPlaying) {
+        playAllHowls();
+      }
+    } else {
+      dispatch(removeHubSound({ id, path }));
     }
-  };
-
-  // remove sounds from the Hub
-  const removeFromHub = () => {
-    dispatch(removeHubSound({ id, path }));
   };
 
   const handleLike = async () => {
@@ -72,33 +80,34 @@ export const SoundItem = ({ id, name, path, imageUrl, likeCount, likedBy }) => {
   };
 
   return (
-    <motion.div whileHover={{ y: -2 }} className="sound-item">
-      <div className="card-content">
-        <img src={imageUrl} alt={name} />
-      </div>
-      <div className="card-footer">
-        <div className="info">
-          <div className="name">{name}</div>
-          {!added ? (
-            <button onClick={addToHub} className="add">
-              ADD
-            </button>
-          ) : (
-            <button onClick={removeFromHub} className="remove">
-              REMOVE
-            </button>
-          )}
+    <div className="item-wrap">
+      <div
+        className="sound-item"
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
+        <div className={`like-count ${show}`}>{likeCount} LIKES</div>
+        <div className="content">
+          <div className="icon">
+            <img src={imageUrl} alt="icon" />
+          </div>
+          <div className="sound-name">{name}</div>
         </div>
-        <div className="sub">
+        <div className="footer">
           <div
-            className={likedByUser ? "like-button liked" : "like-button like"}
+            className={likedByUser ? `option ${show} liked` : `option ${show}`}
             onClick={handleLike}
           >
             <FaHeart />
           </div>
-          <div className="like-count">{likeCount}</div>
+          <div className={`option ${show}`}>
+            <FaStar />
+          </div>
+          <div className={`option ${show}`} onClick={addToHub}>
+            {added ? <FaArrowLeft /> : <FaArrowRight />}
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

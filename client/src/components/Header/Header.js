@@ -17,7 +17,6 @@ const Header = () => {
       try {
         const res = await getUserData();
         const userData = res.data.userData;
-        console.log(userData);
         dispatch(setUsername(userData.username));
         dispatch(setEmail(userData.email));
         dispatch(setID(userData.user_id));

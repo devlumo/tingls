@@ -1,0 +1,32 @@
+.options {
+  display: flex;
+  width: 100%;
+
+  .option {
+    width: 33.3333%;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+
+    &:nth-child(1) {
+      border-bottom-left-radius: 0.3rem;
+      border-bottom-right-radius: 0;
+    }
+
+    &:nth-child(2) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:nth-child(3) {
+      border-bottom-right-radius: 0.3rem;
+      border-bottom-left-radius: 0;
+    }
+
+    &:hover {
+      background-color: var(--tingls-hover);
+    }
+  }
+}

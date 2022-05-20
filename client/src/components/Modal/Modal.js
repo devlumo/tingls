@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion/dist/framer-motion";
 import { RiCloseLine } from "react-icons/ri";
 import "./ModalStyles.scss";
+import { createMix } from "../../api/api";
 
 function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -19,17 +20,9 @@ function Modal({ isOpen, onClose }) {
       }
 
       const { name } = e.target.elements;
+      await createMix(name, data);
 
-      const res = await axios.post(
-        "http://127.0.0.1:8080/api/sounds/createMix",
-        {
-          name: name.value,
-          data,
-        },
-        { withCredentials: true }
-      );
-
-      console.log(res);
+      onClose();
     } catch (error) {
       console.log(error);
     }

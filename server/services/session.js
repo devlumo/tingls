@@ -11,7 +11,7 @@ const currentSession = session({
   name: "session-id",
   saveUninitialized: false,
   cookie: {
-    secure: false,
+    secure: process.env.NODE_ENV === "development" ? false : true,
     httpOnly: true,
     maxAge: 1000 * 60 * 30, // 30 min
     sameSite: "Lax",

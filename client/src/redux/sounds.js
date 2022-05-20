@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { fetchSounds } from "../api/api";
 
 export const getSounds = createAsyncThunk("sounds/getSounds", async () => {
-  const result = await axios.get("http://localhost:8080/api/sounds/", {
-    withCredentials: true,
-  });
+  const result = await fetchSounds();
   return result.data.sounds;
 });
 

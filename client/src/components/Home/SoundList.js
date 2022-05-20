@@ -12,7 +12,6 @@ const SoundList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // trigger redux thunk request
     dispatch(getSounds());
     setLoading(false);
   }, [dispatch]);

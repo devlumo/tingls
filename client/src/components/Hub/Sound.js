@@ -1,16 +1,20 @@
 import React from "react";
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { useState } from "react";
 import useSound from "use-sound";
-import { MdClose } from "react-icons/md";
-import { BsThreeDots } from "react-icons/bs";
+import { IoCloseOutline, IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 import { useDispatch, useSelector } from "react-redux";
-import { removeHubSound, updateMute, updateVolume } from "../../redux/hub";
+import {
+  removeHubSound,
+  updateMute,
+  updateVolume,
+  updatePan,
+} from "../../redux/hub";
 import { playAllHowls } from "../../utils/howlerUtils";
 
 import "./SoundStyles.scss";
 import Volume from "./Volume/Volume";
+import Controls from "./Controls/Controls";
 
 const Sound = ({ id, name, path, imageUrl }) => {
   const dispatch = useDispatch();
@@ -23,8 +27,13 @@ const Sound = ({ id, name, path, imageUrl }) => {
     (state) =>
       state.soundHub.currentSounds.find((sound) => sound.id === id).volume
   );
+  const storedPan = useSelector(
+    (state) => state.soundHub.currentSounds.find((sound) => sound.id === id).pan
+  );
   const hubPlaying = useSelector((state) => state.soundHub.hubPlay);
   const [playing, setPlaying] = useState(false);
+
+  const [expand, setExpand] = useState(false);
 
   // useSound hook creates a new Howl Object and attaches it to the Howler Object
   // eslint-disable-next-line
@@ -68,40 +77,48 @@ const Sound = ({ id, name, path, imageUrl }) => {
     sound.volume(inputValue);
   };
 
-  return (
-    <div
-      onHover
-      className="sound"
-      style={{
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: "cover",
-        // backgroundColor: "rgba(0, 0, 0, 0.7)" /* Tint color */,
-        // backgroundBlendMode: "multiply",
-      }}
-    >
-      <div className="card-header">
-        <BsThreeDots />
-        <div className="sound-name">{name}</div>
-        <MdClose className="remove" onClick={handleRemove} />
-      </div>
+  const handleExpand = () => {
+    setExpand(!expand);
+  };
 
-      <div className="card-content"></div>
-      <div className="card-footer">
-        <div className="controls">
-          <div className="mute">
-            {!muteStatus ? (
-              <FaVolumeUp onClick={handleMute} />
-            ) : (
-              <FaVolumeMute onClick={handleMute} />
-            )}
+  const handlePan = (e) => {
+    let inputValue = parseFloat(e.target.value);
+
+    dispatch(updatePan({ id, pan: inputValue }));
+    sound.stereo(inputValue);
+  };
+
+  return (
+    <div className={`sound ${name}`}>
+      <div className="content">
+        <div className="icon">
+          <img src={imageUrl} alt="" />
+          <div className="name">{name}</div>
+        </div>
+        <div className="end-section">
+          <div className="volume-wrapper">
+            <Volume
+              handlePlay={handlePlay}
+              handleVolume={handleVolume}
+              storedVolume={storedVolume}
+              rangeType="range"
+            />
           </div>
-          <Volume
-            handlePlay={handlePlay}
-            handleVolume={handleVolume}
-            storedVolume={storedVolume}
-          />
+          <div className="expand" onClick={handleExpand}>
+            {expand ? <IoChevronUp /> : <IoChevronDown />}
+          </div>
+          <div className="close" onClick={handleRemove}>
+            <IoCloseOutline />
+          </div>
         </div>
       </div>
+      <Controls
+        handlePan={handlePan}
+        storedPan={storedPan}
+        isOpen={expand}
+        handleMute={handleMute}
+        id={id}
+      />
     </div>
   );
 };

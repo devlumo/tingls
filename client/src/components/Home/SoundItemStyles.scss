@@ -1,191 +1,199 @@
-.sound-item {
-  width: 100%;
-  background-color: var(--secondary-bg);
-  border-radius: 0.375rem;
+.item-wrap {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  box-shadow: rgba(8, 8, 8, 0.3) 0px 1px 2px 0px,
-    rgba(13, 13, 14, 0.15) 0px 1px 3px 1px;
+  padding-top: 5px;
 
-  animation-name: FadeIn;
-  animation-duration: 0.5s;
-  transition-timing-function: linear;
-
-  .card-header {
+  .sound-item {
+    width: 80%;
+    background-color: var(--tingls-bg);
+    border-radius: 0.375rem;
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--body-color);
-
-    .icon {
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-    }
-
-    .category {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  .card-content {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    border: 5px solid var(--tingls-bg);
+    position: relative;
+    padding-top: 15px;
 
-    img {
-      border-radius: 0.375rem 0.375rem 0 0;
-      object-fit: fill;
-      width: 100%;
-      height: 100%;
+    animation-name: FadeIn;
+    animation-duration: 0.5s;
+    transition-timing-function: linear;
+
+    .like-count {
+      position: absolute;
+      background-color: var(--secondary-bg);
+      font-size: x-small;
+      padding: 3px;
+      top: 5px;
+      right: 5px;
+      border-radius: 0.375rem;
+      font-weight: bold;
+      color: var(--body-color);
+
+      box-shadow: rgba(8, 8, 8, 0.3) 0px 1px 2px 0px,
+        rgba(13, 13, 14, 0.15) 0px 1px 3px 1px;
     }
 
-    .name {
-      font-size: 1.5rem;
-      margin-right: 3rem;
-      text-align: center;
+    .ctrls {
+      display: flex;
+      padding-top: 15px;
+      justify-content: space-evenly;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+
+      //   overflow: hidden;
+      //   animation-name: grow;
+      //   animation-duration: 0.6s;
+      //   transition-timing-function: linear;
+
+      .left-section {
+        width: 50%;
+      }
+
+      .right-section {
+        width: 50%;
+      }
     }
 
     &:hover {
+      border: 5px solid var(--tingls-hover);
       cursor: pointer;
     }
-  }
 
-  .card-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    padding: 10px;
-    text-transform: capitalize;
-
-    .info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      text-transform: capitalize;
+    .sound-head {
+      padding: 10px;
     }
 
-    .sub {
+    .content {
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
       width: 100%;
-      color: var(--body-color);
-      font-size: 0.8rem;
-      margin-top: 5px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-      .like-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-right: 5px;
-        font-size: 1rem;
-
-        &:hover {
-          cursor: pointer;
+      .icon {
+        img {
+          width: 75px;
+          height: 75px;
         }
       }
 
-      .like-count {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .sound-name {
+        margin-top: 20px;
+        font-size: 1rem;
+        text-align: center;
+        text-transform: capitalize;
+      }
+    }
+
+    .footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .option {
+        width: 33.3333%;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+        border-bottom-left-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+
+        &:nth-child(1) {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &:nth-child(2) {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &:nth-child(3) {
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+
+        &:hover {
+          background-color: var(--tingls-hover);
+        }
+      }
+    }
+
+    button {
+      padding: 5px;
+      border-radius: 0.375rem;
+      border: none;
+      color: white;
+      background-color: #4e00c2;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .like {
+      color: var(--border-color);
+
+      &:hover {
+        color: #ed4956;
+      }
+    }
+
+    .liked {
+      color: #ed4956;
+    }
+
+    @keyframes FadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-moz-keyframes FadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes FadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-o-keyframes FadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-ms-keyframes FadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
       }
     }
   }
-
-  button {
-    padding: 5px;
-    border-radius: 0.375rem;
-    border: none;
-    color: white;
-    background-color: #4e00c2;
-    font-weight: bold;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .add {
-    background-color: #4e00c2;
-
-    &:hover {
-      background-color: var(--tingls-hover);
-    }
-  }
-
-  .remove {
-    background-color: #f14e4e;
-
-    &:hover {
-      background-color: #eb4040;
-    }
-  }
-
-  .like {
-    color: var(--border-color);
-
-    &:hover {
-      color: #ed4956;
-    }
-  }
-
-  .liked {
-    color: #ed4956;
-  }
-
-  @keyframes FadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes FadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes FadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes FadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes FadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+}
+.hide {
+  opacity: 0;
 }

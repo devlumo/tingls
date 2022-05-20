@@ -133,6 +133,27 @@ const hubSlice = createSlice({
       }
     },
 
+    updatePan(state, action) {
+      const storedState = JSON.parse(localStorage.getItem("app_state"));
+      const currentSound = storedState.hubSounds.find(
+        (sound) => sound.id === action.payload.id
+      );
+
+      currentSound.pan = action.payload.pan;
+
+      let currentIndex = state.currentSounds.indexOf(
+        state.currentSounds.find((sound) => sound.id === action.payload.id)
+      );
+
+      if (currentIndex > -1) {
+        state.currentSounds.splice(currentIndex, 1, currentSound);
+
+        // update local storage with new sounds array
+        storedState.hubSounds = state.currentSounds;
+        localStorage.setItem("app_state", JSON.stringify(storedState));
+      }
+    },
+
     updateHubPlaying(state, action) {
       const storedState = JSON.parse(localStorage.getItem("app_state"));
       storedState.hubPlay = action.payload;
@@ -177,5 +198,6 @@ export const {
   updateHubPlaying,
   loadMix,
   clearHub,
+  updatePan,
 } = hubSlice.actions;
 export default hubSlice.reducer;

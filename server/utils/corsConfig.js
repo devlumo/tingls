@@ -1,6 +1,12 @@
 import cors from "cors";
+import "./envConfig.js";
 
-const whitelist = new Set(["http://localhost:3000", "http://127.0.0.1:3000"]);
+const whitelist = new Set("http://tingls.io");
+
+if (process.env.NODE_ENV === "development") {
+  whitelist.add("http://localhost:3000");
+  whitelist.add("http://127.0.0.1:3000");
+}
 
 const corsOptions = {
   origin: function (origin, callback) {

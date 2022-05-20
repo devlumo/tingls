@@ -19,7 +19,7 @@ const SignUp = () => {
         onClick={handleModalOpen}
         className="sign-up"
       >
-        Sign up
+        <span className="button-text">SIGN UP</span>
       </motion.button>
       <AnimatePresence initial={false} exitBeforeEnter={true}>
         {

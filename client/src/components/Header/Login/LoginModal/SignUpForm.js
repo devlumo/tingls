@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { setEmail, setUsername, setID } from "../../../../redux/auth";
-import axios from "axios";
+import { signUp } from "../../../../api/api";
 
 const SignUpForm = ({ switchForm }) => {
   const [error, setError] = useState(null);
@@ -14,22 +14,14 @@ const SignUpForm = ({ switchForm }) => {
     try {
       e.preventDefault();
       const { username, fullname, email, password } = e.target.elements;
+      const res = await signUp(username, fullname, email, password);
 
-      const res = await axios.post(
-        "http://127.0.0.1:8080/api/auth/signup/",
-        {
-          userName: username.value,
-          fullName: fullname.value,
-          email: email.value,
-          password: password.value,
-        },
-        { withCredentials: true }
-      );
+      const { userData } = res.data;
 
-      const userData = res.data.userData;
       dispatch(setUsername(userData.username));
       dispatch(setEmail(userData.email));
       dispatch(setID(userData.user_id));
+
       navigate("/");
     } catch (error) {
       console.log(error);
