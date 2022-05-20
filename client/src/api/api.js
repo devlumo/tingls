@@ -53,12 +53,13 @@ export const fetchMixes = async () => {
   });
 };
 
-export const createMix = async (name, data) => {
+export const createMix = async (name, data, creator) => {
   return await axios.post(
     `${API_URL}sounds/createMix`,
     {
       name: name.value,
       data,
+      creator,
     },
     { withCredentials: true }
   );

@@ -12,6 +12,11 @@ const mixSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  creator: {
+    type: String,
+    required: true,
+  },
+  createdOn: { type: Date, default: Date.now },
 });
 
 const Mix = mongoose.model("mixes", mixSchema);

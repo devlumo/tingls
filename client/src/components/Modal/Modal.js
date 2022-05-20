@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDom from "react-dom";
-import axios from "axios";
 import { motion } from "framer-motion/dist/framer-motion";
 import { RiCloseLine } from "react-icons/ri";
 import "./ModalStyles.scss";
 import { createMix } from "../../api/api";
+import { useSelector } from "react-redux";
 
 function Modal({ isOpen, onClose }) {
+  const { userName } = useSelector((state) => state.user);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
@@ -20,7 +22,7 @@ function Modal({ isOpen, onClose }) {
       }
 
       const { name } = e.target.elements;
-      await createMix(name, data);
+      await createMix(name, data, userName);
 
       onClose();
     } catch (error) {

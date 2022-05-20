@@ -26,7 +26,14 @@ const MixList = () => {
       ) : (
         selectMixes.map((el) => {
           return (
-            <MixItem key={el._id} name={el.name} id={el._id} data={el.data} />
+            <MixItem
+              key={el._id}
+              name={el.name}
+              id={el._id}
+              data={el.data}
+              creator={el.creator}
+              createdOn={el.createdOn}
+            />
           );
         })
       )}
